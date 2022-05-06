@@ -4,7 +4,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DB_DATABASE, DB_HOST, DB_PASSWORD, DB_PORT, DB_USER } from './config/constants';
-// import { ProductoModule } from './producto/producto.module';
+import { InmueblesModule } from './inmuebles/inmuebles.module';
+import { UsuariosModule } from './usuarios/usuarios.module';
 
 @Module({
   imports: [
@@ -27,7 +28,8 @@ import { DB_DATABASE, DB_HOST, DB_PASSWORD, DB_PORT, DB_USER } from './config/co
       }),
       inject: [ConfigService],
     }),
-    // ProductoModule
+    InmueblesModule,
+    UsuariosModule
   ],
   controllers: [AppController],
   providers: [AppService],
