@@ -23,7 +23,7 @@ import { DB_DATABASE, DB_HOST, DB_PASSWORD, DB_PORT, DB_USER } from './config/co
         database: configService.get<string>(DB_DATABASE),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
         synchronize: true,
-        logging: false //para crear las tablas
+        logging: true //para crear las tablas
       }),
       inject: [ConfigService],
     }),
