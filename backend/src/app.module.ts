@@ -4,8 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DB_DATABASE, DB_HOST, DB_PASSWORD, DB_PORT, DB_USER } from './config/constants';
-import { InmueblesModule } from './inmuebles/inmuebles.module';
-import { UsuariosModule } from './usuarios/usuarios.module';
+import { UsuariosModule } from './usuarios/usuarios/usuarios.module';
 
 @Module({
   imports: [
@@ -24,11 +23,10 @@ import { UsuariosModule } from './usuarios/usuarios.module';
         database: configService.get<string>(DB_DATABASE),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
         synchronize: true,
-        logging: true //para crear las tablas
+        logging: false //para crear las tablas
       }),
       inject: [ConfigService],
     }),
-    InmueblesModule,
     UsuariosModule
   ],
   controllers: [AppController],
