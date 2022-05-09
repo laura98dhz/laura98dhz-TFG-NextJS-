@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DB_DATABASE, DB_HOST, DB_PASSWORD, DB_PORT, DB_USER } from './config/constants';
 import { UsuariosModule } from './usuarios/usuarios/usuarios.module';
+import { InmueblesModule } from './inmuebles/inmuebles.module';
 
 @Module({
   imports: [
@@ -27,7 +28,8 @@ import { UsuariosModule } from './usuarios/usuarios/usuarios.module';
       }),
       inject: [ConfigService],
     }),
-    UsuariosModule
+    UsuariosModule,
+    InmueblesModule
   ],
   controllers: [AppController],
   providers: [AppService],
