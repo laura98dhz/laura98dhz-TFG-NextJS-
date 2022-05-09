@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateInmuebleDto } from './dto/create-inmueble.dto';
 import { UpdateInmuebleDto } from './dto/update-inmueble.dto';
 import { InmuebleEntity } from './entities/inmueble.entity';
@@ -8,23 +8,43 @@ export class InmueblesService {
   
   private inmueble: InmuebleEntity[] = [];
 
-  create(createInmuebleDto: CreateInmuebleDto) {
-    return 'This action adds a new inmueble';
+  findAll(): InmuebleEntity[] {
+    return this.inmueble ;
   }
 
-  findAll() {
-    return `This action returns all inmuebles`;
+  findOne(id: number): InmuebleEntity{
+      const findUsuario: InmuebleEntity = this.inmueble.find((task) => task.id === id);
+      if(!findUsuario){
+          throw new NotFoundException('Task not found');
+      }
+
+      return findUsuario;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} inmueble`;
+  create(data: CreateInmuebleDto): InmuebleEntity{
+      const newUsuario: InmuebleEntity = {id: this.inmueble.length + 1, ...data}; 
+      this.inmueble.unshift(newUsuario);
+      return newUsuario;
   }
 
-  update(id: number, updateInmuebleDto: UpdateInmuebleDto) {
-    return `This action updates a #${id} inmueble`;
+  update(taskId: number, data: UpdateInmuebleDto){
+      const findUsuario: number = this.inmueble.findIndex((task) => task.id === taskId);
+      
+      if(findUsuario === -1){
+          throw new NotFoundException('User not found');
+      }
+
+      this.inmueble[findUsuario] = {...this.inmueble[findUsuario], ...data}
+
+      return findUsuario;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} inmueble`;
+  remove(id: number){
+      const findUsuario: number = this.inmueble.findIndex((task) => task.id === id);
+      
+      if(findUsuario === -1){
+          throw new NotFoundException('User not found');
+      }    
+      this.inmueble = this.inmueble.filter((usuario)=> usuario.id !== id);
   }
 }
