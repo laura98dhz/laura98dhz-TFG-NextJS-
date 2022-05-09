@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Delete, Put, ParseIntPipe, HttpStatus, HttpCode } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Put, ParseIntPipe, HttpStatus, HttpCode, UsePipes, ValidationPipe } from '@nestjs/common';
 import { UsuariosService } from './usuarios.service';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
@@ -20,12 +20,14 @@ export class UsuariosController {
     return this.usuariosService.findOne(+id);
   }
 
+  @UsePipes(new ValidationPipe({whitelist:true}))
   @Post()
   @HttpCode(HttpStatus.CREATED)
   create(@Body() data: CreateUsuarioDto) {
     return this.usuariosService.create(data);
   }
 
+  @UsePipes(new ValidationPipe({whitelist:true}))
   @Put(':id')
   @HttpCode(HttpStatus.OK)
   update(@Param('id', ParseIntPipe) id: number, @Body() data: UpdateUsuarioDto) {
