@@ -1,9 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { CreateInmuebleDto } from './dto/create-inmueble.dto';
 import { UpdateInmuebleDto } from './dto/update-inmueble.dto';
+import { InmuebleEntity } from './entities/inmueble.entity';
 
 @Injectable()
 export class InmueblesService {
+  
+  private inmueble: InmuebleEntity[] = [];
+
   create(createInmuebleDto: CreateInmuebleDto) {
     return 'This action adds a new inmueble';
   }

@@ -1,1 +1,1 @@
-export class Inmueble {}
+export class InmuebleEntity {}
