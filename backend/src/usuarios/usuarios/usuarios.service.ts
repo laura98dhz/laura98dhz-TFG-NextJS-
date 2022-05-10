@@ -12,14 +12,14 @@ export class UsuariosService {
         return this.usuario ;
     }
 
-    findOne(id: number): UsuarioEntity{
-        const findUsuario: UsuarioEntity = this.usuario.find((usuario) => usuario.id === id);
-        if(!findUsuario){
-            throw new NotFoundException('Usser not found');
-        }
+    // findOne(id: number): UsuarioEntity{
+    //     const findUsuario: UsuarioEntity = this.usuario.find((usuario) => usuario.id === id);
+    //     if(!findUsuario){
+    //         throw new NotFoundException('Usser not found');
+    //     }
 
-        return findUsuario;
-    }
+    //     return findUsuario;
+    // }
 
     findByNombre(nombreUsuario: string): boolean{
         const findUsuario: UsuarioEntity = this.usuario.find((usuario) => usuario.nombreUsuario === nombreUsuario);
@@ -32,7 +32,8 @@ export class UsuariosService {
     }
     
     create(data: CreateUsuarioDto): UsuarioEntity{
-        const newUsuario: UsuarioEntity = {id: this.usuario.length + 1, ...data}; 
+        //const newUsuario: UsuarioEntity = {nombreUsuario: this.usuario.length + 1, ...data}; 
+        const newUsuario: UsuarioEntity = data; 
         if(!this.findByNombre(data.nombreUsuario)){
             throw new BadRequestException('Usser exist');
         }
@@ -41,8 +42,8 @@ export class UsuariosService {
         return newUsuario;
     }
 
-    update(id: number, data: UpdateUsuarioDto){
-        const findUsuario: number = this.usuario.findIndex((usuario) => usuario.id === id);
+    update(nombreUsuario: string, data: UpdateUsuarioDto){
+        const findUsuario: number = this.usuario.findIndex((usuario) => usuario.nombreUsuario === nombreUsuario);
         
         if(findUsuario === -1){
             throw new NotFoundException('User not found');
@@ -53,12 +54,12 @@ export class UsuariosService {
         return findUsuario;
     }
 
-    remove(id: number){
-        const findUsuario: number = this.usuario.findIndex((usuario) => usuario.id === id);
+    remove(nombreUsuario: string){
+        const findUsuario: number = this.usuario.findIndex((usuario) => usuario.nombreUsuario === nombreUsuario);
         
         if(findUsuario === -1){
             throw new NotFoundException('User not found');
         }    
-        this.usuario = this.usuario.filter((usuario)=> usuario.id !== id);
+        this.usuario = this.usuario.filter((usuario)=> usuario.nombreUsuario !== nombreUsuario);
     }
 }
