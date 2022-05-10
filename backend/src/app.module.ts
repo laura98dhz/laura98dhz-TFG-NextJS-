@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Global, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
@@ -7,6 +7,7 @@ import { DB_DATABASE, DB_HOST, DB_PASSWORD, DB_PORT, DB_USER } from './config/co
 import { UsuariosModule } from './usuarios/usuarios/usuarios.module';
 import { InmueblesModule } from './inmuebles/inmuebles.module';
 
+@Global()
 @Module({
   imports: [
     ConfigModule.forRoot({
