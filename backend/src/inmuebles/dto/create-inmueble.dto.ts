@@ -4,15 +4,15 @@ export class CreateInmuebleDto {
     
     @IsNotEmpty()
     @IsString()
+    readonly ubicacion: string;
+
+    @IsNotEmpty()
+    @IsString()
     readonly tipoInmueble: string;
 
     @IsNotEmpty()
     @IsString()
     readonly tipoOperacion: string;
-    
-    @IsNotEmpty()
-    @IsString()
-    readonly vendedor: string;
     
     @IsNotEmpty()
     @IsNumber()

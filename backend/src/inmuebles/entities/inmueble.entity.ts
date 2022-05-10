@@ -1,5 +1,6 @@
 export class InmuebleEntity {
     readonly id:number;
+    readonly ubicacion: string;
     readonly tipoInmueble: string;
     readonly tipoOperacion: string;
     readonly vendedor: string;

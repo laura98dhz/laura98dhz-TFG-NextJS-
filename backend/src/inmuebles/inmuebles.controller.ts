@@ -19,11 +19,17 @@ export class InmueblesController {
     return this.inmueblesService.findOne(+id);
   }
 
+  @Post(':ubicacion')
+  @HttpCode(HttpStatus.OK)
+  findByUbicacion(@Param('ubicacion') ubicacion: string) {
+    return this.inmueblesService.findByUbicacion(ubicacion);
+  }
+
   @UsePipes(new ValidationPipe({whitelist:true}))
-  @Post()
+  @Post('/crear/:vendedor')
   @HttpCode(HttpStatus.CREATED)
-  create(@Body() data: CreateInmuebleDto) {
-    return this.inmueblesService.create(data);
+  create(@Param('vendedor') vendedor: string, @Body() data: CreateInmuebleDto) {
+    return this.inmueblesService.create(data, vendedor);
   }
 
   @UsePipes(new ValidationPipe({whitelist:true}))

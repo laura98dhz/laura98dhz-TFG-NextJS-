@@ -13,38 +13,47 @@ export class InmueblesService {
   }
 
   findOne(id: number): InmuebleEntity{
-      const findUsuario: InmuebleEntity = this.inmueble.find((task) => task.id === id);
+      const findUsuario: InmuebleEntity = this.inmueble.find((inmueble) => inmueble.id === id);
       if(!findUsuario){
-          throw new NotFoundException('Task not found');
+          throw new NotFoundException('Inmueble not found');
       }
 
       return findUsuario;
   }
 
-  create(data: CreateInmuebleDto): InmuebleEntity{
-      const newUsuario: InmuebleEntity = {id: this.inmueble.length + 1, ...data}; 
+  findByUbicacion(ubicacion: string): any{
+    const findInmuebles: InmuebleEntity[] = this.inmueble.filter((inmueble) =>inmueble.ubicacion === ubicacion);
+
+    if(!findInmuebles){
+        throw new NotFoundException('Inmueble not found');
+    }
+    return findInmuebles;
+}
+
+  create(data: CreateInmuebleDto, vendedor: string): InmuebleEntity{
+      const newUsuario: InmuebleEntity = {id: this.inmueble.length + 1, vendedor: vendedor,...data}; 
       this.inmueble.unshift(newUsuario);
       return newUsuario;
   }
 
-  update(taskId: number, data: UpdateInmuebleDto){
-      const findUsuario: number = this.inmueble.findIndex((task) => task.id === taskId);
+  update(id: number, data: UpdateInmuebleDto){
+      const findInmueble: number = this.inmueble.findIndex((inmueble) => inmueble.id === id);
       
-      if(findUsuario === -1){
-          throw new NotFoundException('User not found');
+      if(findInmueble === -1){
+          throw new NotFoundException('Inmueble not found');
       }
 
-      this.inmueble[findUsuario] = {...this.inmueble[findUsuario], ...data}
+      this.inmueble[findInmueble] = {...this.inmueble[findInmueble], ...data}
 
-      return findUsuario;
+      return findInmueble;
   }
 
   remove(id: number){
-      const findUsuario: number = this.inmueble.findIndex((task) => task.id === id);
+      const findInmueble: number = this.inmueble.findIndex((inmueble) => inmueble.id === id);
       
-      if(findUsuario === -1){
-          throw new NotFoundException('User not found');
+      if(findInmueble === -1){
+          throw new NotFoundException('Inmueble not found');
       }    
-      this.inmueble = this.inmueble.filter((usuario)=> usuario.id !== id);
+      this.inmueble = this.inmueble.filter((inmueble)=> inmueble.id !== id);
   }
 }

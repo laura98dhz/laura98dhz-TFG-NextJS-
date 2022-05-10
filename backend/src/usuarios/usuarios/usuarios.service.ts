@@ -41,8 +41,8 @@ export class UsuariosService {
         return newUsuario;
     }
 
-    update(taskId: number, data: UpdateUsuarioDto){
-        const findUsuario: number = this.usuario.findIndex((task) => task.id === taskId);
+    update(id: number, data: UpdateUsuarioDto){
+        const findUsuario: number = this.usuario.findIndex((usuario) => usuario.id === id);
         
         if(findUsuario === -1){
             throw new NotFoundException('User not found');
@@ -54,7 +54,7 @@ export class UsuariosService {
     }
 
     remove(id: number){
-        const findUsuario: number = this.usuario.findIndex((task) => task.id === id);
+        const findUsuario: number = this.usuario.findIndex((usuario) => usuario.id === id);
         
         if(findUsuario === -1){
             throw new NotFoundException('User not found');
