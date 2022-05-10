@@ -20,6 +20,12 @@ export class UsuariosController {
     return this.usuariosService.findOne(+id);
   }
 
+  @Post(':nombreUsuario')
+  @HttpCode(HttpStatus.OK)
+  findByNombre(@Param('nombreUsuario') nombreUsuario: string) {
+    return this.usuariosService.findByNombre(nombreUsuario);
+  }
+
   @UsePipes(new ValidationPipe({whitelist:true}))
   @Post()
   @HttpCode(HttpStatus.CREATED)
@@ -40,3 +46,7 @@ export class UsuariosController {
     return this.usuariosService.remove(id);
   }
 }
+function ParseStringPipe(arg0: string, ParseStringPipe: any) {
+  throw new Error('Function not implemented.');
+}
+
