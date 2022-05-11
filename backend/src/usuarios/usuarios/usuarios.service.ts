@@ -1,19 +1,19 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateUsuarioDto } from './dto/create-usuario.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
-import { UsuarioEntity } from './entities/usuario.entity';
+import { UsuariosEntity } from './entities/usuario.entity';
 
 @Injectable()
 export class UsuariosService {
 
-    private usuario: UsuarioEntity[] = [];
+    private usuario: UsuariosEntity[] = [];
     
-    findAll(): UsuarioEntity[] {
+    findAll(): UsuariosEntity[] {
         return this.usuario ;
     }
 
-    // findOne(id: number): UsuarioEntity{
-    //     const findUsuario: UsuarioEntity = this.usuario.find((usuario) => usuario.id === id);
+    // findOne(id: number): UsuariosEntity{
+    //     const findUsuario: UsuariosEntity = this.usuario.find((usuario) => usuario.id === id);
     //     if(!findUsuario){
     //         throw new NotFoundException('Usser not found');
     //     }
@@ -22,7 +22,7 @@ export class UsuariosService {
     // }
 
     findByNombre(nombreUsuario: string): boolean{
-        const findUsuario: UsuarioEntity = this.usuario.find((usuario) => usuario.nombreUsuario === nombreUsuario);
+        const findUsuario: UsuariosEntity = this.usuario.find((usuario) => usuario.nombreUsuario === nombreUsuario);
 
         if(findUsuario){
             return false;
@@ -31,9 +31,9 @@ export class UsuariosService {
 
     }
     
-    create(data: CreateUsuarioDto): UsuarioEntity{
-        //const newUsuario: UsuarioEntity = {nombreUsuario: this.usuario.length + 1, ...data}; 
-        const newUsuario: UsuarioEntity = data; 
+    create(data: CreateUsuarioDto): UsuariosEntity{
+        //const newUsuario: UsuariosEntity = {nombreUsuario: this.usuario.length + 1, ...data}; 
+        const newUsuario: UsuariosEntity = data; 
         if(!this.findByNombre(data.nombreUsuario)){
             throw new BadRequestException('Usser exist');
         }

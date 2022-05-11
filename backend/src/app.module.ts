@@ -6,6 +6,8 @@ import { AppService } from './app.service';
 import { DB_DATABASE, DB_HOST, DB_PASSWORD, DB_PORT, DB_USER } from './config/constants';
 import { UsuariosModule } from './usuarios/usuarios/usuarios.module';
 import { InmueblesModule } from './inmuebles/inmuebles.module';
+import { UsuariosEntity } from './usuarios/usuarios/entities/usuario.entity';
+import { InmuebleEntity } from './inmuebles/entities/inmueble.entity';
 
 @Global()
 @Module({
@@ -30,7 +32,9 @@ import { InmueblesModule } from './inmuebles/inmuebles.module';
       inject: [ConfigService],
     }),
     UsuariosModule,
-    InmueblesModule
+    InmueblesModule,
+    UsuariosEntity,
+    InmuebleEntity
   ],
   controllers: [AppController],
   providers: [AppService],

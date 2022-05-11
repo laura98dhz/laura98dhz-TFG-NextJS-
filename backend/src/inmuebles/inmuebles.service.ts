@@ -1,4 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { UsuariosEntity } from 'src/usuarios/usuarios/entities/usuario.entity';
 import { CreateInmuebleDto } from './dto/create-inmueble.dto';
 import { UpdateInmuebleDto } from './dto/update-inmueble.dto';
 import { InmuebleEntity } from './entities/inmueble.entity';
@@ -30,7 +31,7 @@ export class InmueblesService {
     return findInmuebles;
 }
 
-  create(data: CreateInmuebleDto, vendedor: string): InmuebleEntity{
+  create(data: CreateInmuebleDto, vendedor: UsuariosEntity): InmuebleEntity{
       const newUsuario: InmuebleEntity = {id: this.inmueble.length + 1, vendedor: vendedor,...data}; 
       this.inmueble.unshift(newUsuario);
       return newUsuario;

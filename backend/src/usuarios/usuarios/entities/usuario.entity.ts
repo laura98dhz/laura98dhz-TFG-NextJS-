@@ -1,7 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { InmuebleEntity } from "src/inmuebles/entities/inmueble.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class UsuarioEntity{
+export class UsuariosEntity{
     
     @PrimaryGeneratedColumn()
     readonly nombreUsuario: string; 

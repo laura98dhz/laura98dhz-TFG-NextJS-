@@ -2,6 +2,7 @@ import { Controller, Get, Post, Body, Param, Delete, Put, ParseIntPipe, HttpStat
 import { InmueblesService } from './inmuebles.service';
 import { CreateInmuebleDto } from './dto/create-inmueble.dto';
 import { UpdateInmuebleDto } from './dto/update-inmueble.dto';
+import { UsuariosEntity } from 'src/usuarios/usuarios/entities/usuario.entity';
 
 @Controller('inmuebles')
 export class InmueblesController {
@@ -28,7 +29,7 @@ export class InmueblesController {
   @UsePipes(new ValidationPipe({whitelist:true}))
   @Post('/crear/:vendedor')
   @HttpCode(HttpStatus.CREATED)
-  create(@Param('vendedor') vendedor: string, @Body() data: CreateInmuebleDto) {
+  create(@Param('vendedor') vendedor: UsuariosEntity, @Body() data: CreateInmuebleDto) {
     return this.inmueblesService.create(data, vendedor);
   }
 
