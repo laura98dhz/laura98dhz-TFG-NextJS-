@@ -1,11 +1,12 @@
 import { UsuariosEntity } from "src/usuarios/usuarios/entities/usuario.entity";
-import { Column, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
+@Entity()
 export class InmuebleEntity {
 
     @PrimaryGeneratedColumn()
-    readonly id:number;
-    
+    readonly id: number;
+
     @Column()
     readonly ubicacion: string;
 
@@ -14,11 +15,13 @@ export class InmuebleEntity {
 
     @Column()
     readonly tipoOperacion: string;
-    
-    @ManyToOne(type => UsuariosEntity, usuariosEntity => usuariosEntity.nombreUsuario)
+
+    @ManyToOne(() => UsuariosEntity, (usuariosEntity) => usuariosEntity.nombreUsuario, {
+        onDelete: "CASCADE"
+    })
     @JoinColumn({ name: 'vendedor_id' })
     readonly vendedor: UsuariosEntity;
-    
+
     @Column()
     readonly superficie: number;
 

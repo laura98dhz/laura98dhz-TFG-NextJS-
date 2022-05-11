@@ -12,6 +12,9 @@ export class UsuariosEntity{
     
     @Column()
     readonly correo: string;
+
+    @OneToMany(() => InmuebleEntity, (inmuebleEntity) => inmuebleEntity.vendedor)
+    inmuebles?: InmuebleEntity[]; 
 }
 
 //https://typeorm.io/relations

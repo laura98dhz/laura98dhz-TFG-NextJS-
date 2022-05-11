@@ -6,8 +6,7 @@ import { AppService } from './app.service';
 import { DB_DATABASE, DB_HOST, DB_PASSWORD, DB_PORT, DB_USER } from './config/constants';
 import { UsuariosModule } from './usuarios/usuarios/usuarios.module';
 import { InmueblesModule } from './inmuebles/inmuebles.module';
-import { UsuariosEntity } from './usuarios/usuarios/entities/usuario.entity';
-import { InmuebleEntity } from './inmuebles/entities/inmueble.entity';
+
 
 @Global()
 @Module({
@@ -27,14 +26,12 @@ import { InmuebleEntity } from './inmuebles/entities/inmueble.entity';
         database: configService.get<string>(DB_DATABASE),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
         synchronize: true,
-        logging: false //para crear las tablas
+        logging: true //para crear las tablas
       }),
       inject: [ConfigService],
     }),
     UsuariosModule,
-    InmueblesModule,
-    UsuariosEntity,
-    InmuebleEntity
+    InmueblesModule
   ],
   controllers: [AppController],
   providers: [AppService],
