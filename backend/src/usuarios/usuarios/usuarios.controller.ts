@@ -20,31 +20,31 @@ export class UsuariosController {
   //   return this.usuariosService.findOne(+id);
   // }
 
-  @Get(':nombreUsuario')
-  @HttpCode(HttpStatus.OK)
-  findByNombre(@Param('nombreUsuario') nombreUsuario: string) {
-    return this.usuariosService.findByNombre(nombreUsuario);
-  }
+  // @Get(':nombreUsuario')
+  // @HttpCode(HttpStatus.OK)
+  // findByNombre(@Param('nombreUsuario') nombreUsuario: string) {
+  //   return this.usuariosService.findByNombre(nombreUsuario);
+  // }
 
-  @UsePipes(new ValidationPipe({whitelist:true}))
-  @Post()
-  @HttpCode(HttpStatus.CREATED)
-  create(@Body() data: CreateUsuarioDto) {
-    return this.usuariosService.create(data);
-  }
+  // @UsePipes(new ValidationPipe({whitelist:true}))
+  // @Post()
+  // @HttpCode(HttpStatus.CREATED)
+  // create(@Body() data: CreateUsuarioDto) {
+  //   return this.usuariosService.create(data);
+  // }
 
-  @UsePipes(new ValidationPipe({whitelist:true}))
-  @Put(':nombreUsuario')
-  @HttpCode(HttpStatus.OK)
-  update(@Param('nombreUsuario') nombreUsuario: string, @Body() data: UpdateUsuarioDto) {
-    return this.usuariosService.update(nombreUsuario, data);
-  }
+  // @UsePipes(new ValidationPipe({whitelist:true}))
+  // @Put(':nombreUsuario')
+  // @HttpCode(HttpStatus.OK)
+  // update(@Param('nombreUsuario') nombreUsuario: string, @Body() data: UpdateUsuarioDto) {
+  //   return this.usuariosService.update(nombreUsuario, data);
+  // }
 
-  @Delete(':nombreUsuario')
-  @HttpCode(HttpStatus.OK)
-  remove(@Param('nombreUsuario') nombreUsuario: string) {
-    return this.usuariosService.remove(nombreUsuario);
-  }
+  // @Delete(':nombreUsuario')
+  // @HttpCode(HttpStatus.OK)
+  // remove(@Param('nombreUsuario') nombreUsuario: string) {
+  //   return this.usuariosService.remove(nombreUsuario);
+  // }
 }
 
 
