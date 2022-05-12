@@ -6,46 +6,40 @@ import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 @Controller('usuarios')
 export class UsuariosController {
   
-  // constructor(private readonly usuariosService: UsuariosService) {}
+  constructor(private readonly usuariosService: UsuariosService) {}
 
   
-  // @Get()
-  // @HttpCode(HttpStatus.OK)
-  // findAll() {
-  //   return this.usuariosService.findAll();
-  // }
+  @Get()
+  @HttpCode(HttpStatus.OK)
+  findAll() {
+    return this.usuariosService.findAll();
+  }
   
-  // @Get(':id')
-  // @HttpCode(HttpStatus.OK)
-  // findOne(@Param('id', ParseIntPipe) id: number) {
-  //   return this.usuariosService.findOne(+id);
-  // }
+  @Get(':nombreUsuario')
+  @HttpCode(HttpStatus.OK)
+  findByNombre(@Param('nombreUsuario') nombreUsuario: string) {
+    return this.usuariosService.findByNombre(nombreUsuario);
+  }
 
-  // @Get(':nombreUsuario')
-  // @HttpCode(HttpStatus.OK)
-  // findByNombre(@Param('nombreUsuario') nombreUsuario: string) {
-  //   return this.usuariosService.findByNombre(nombreUsuario);
-  // }
+  @UsePipes(new ValidationPipe({whitelist:true}))
+  @Post()
+  @HttpCode(HttpStatus.CREATED)
+  create(@Body() data: CreateUsuarioDto) {
+    return this.usuariosService.create(data);
+  }
 
-  // @UsePipes(new ValidationPipe({whitelist:true}))
-  // @Post()
-  // @HttpCode(HttpStatus.CREATED)
-  // create(@Body() data: CreateUsuarioDto) {
-  //   return this.usuariosService.create(data);
-  // }
+  @UsePipes(new ValidationPipe({whitelist:true}))
+  @Put(':nombreUsuario')
+  @HttpCode(HttpStatus.OK)
+  update(@Param('nombreUsuario') nombreUsuario: string, @Body() data: UpdateUsuarioDto) {
+    return this.usuariosService.update(nombreUsuario, data);
+  }
 
-  // @UsePipes(new ValidationPipe({whitelist:true}))
-  // @Put(':nombreUsuario')
-  // @HttpCode(HttpStatus.OK)
-  // update(@Param('nombreUsuario') nombreUsuario: string, @Body() data: UpdateUsuarioDto) {
-  //   return this.usuariosService.update(nombreUsuario, data);
-  // }
-
-  // @Delete(':nombreUsuario')
-  // @HttpCode(HttpStatus.OK)
-  // remove(@Param('nombreUsuario') nombreUsuario: string) {
-  //   return this.usuariosService.remove(nombreUsuario);
-  // }
+  @Delete(':nombreUsuario')
+  @HttpCode(HttpStatus.OK)
+  delete(@Param('nombreUsuario') nombreUsuario: string) {
+    return this.usuariosService.delete(nombreUsuario);
+  }
 }
 
 

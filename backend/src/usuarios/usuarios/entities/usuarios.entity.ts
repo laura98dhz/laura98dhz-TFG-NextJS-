@@ -5,7 +5,10 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 export class UsuariosEntity{
     
     @PrimaryGeneratedColumn()
-    readonly nombreUsuario: string; 
+    readonly id: number; 
+
+    @Column({type: 'varchar', length: 15, nullable: false})
+    readonly nombreUsuario: string;
 
     @Column({type: 'varchar', length: 15, nullable: false})
     readonly contraseña: string;

@@ -1,5 +1,8 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Console } from 'console';
+import { exit } from 'process';
+import { ConnectionOptionsReader, getRepository } from 'typeorm';
 import { CreateUsuarioDto } from './dto/create-usuarios.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { UsuariosEntity } from './entities/usuarios.entity';
@@ -8,60 +11,80 @@ import { UsuariosRepository } from './usuarios.repository';
 
 @Injectable()
 export class UsuariosService {
-    
+
     constructor(
         @InjectRepository(UsuariosEntity) private usuarioRepository: UsuariosRepository
     ) { }
 
-    // async findAll(): Promise<UsuariosEntity[]> {
-    //     const list = await this.usuarioRepository.createQueryBuilder('nombreUsuario');
-    //     if(!list.length){
-    //         throw new NotFoundException({message: 'No hay usuarios'})
-    //     }
-    //     return list;
-    // }
+    async findAll(): Promise<any> {
+        const usuarios = await this.usuarioRepository.createQueryBuilder("usuario").getMany();
+        console.log(usuarios);
 
-    
+        if (!usuarios.length) {
+            throw new NotFoundException({ message: 'No hay usuarios' })
+        }
+        return usuarios;
+    }
 
-    // findByNombre(nombreUsuario: string): boolean{
-    //     const findUsuario: UsuariosEntity = this.usuario.find((usuario) => usuario.nombreUsuario === nombreUsuario);
+    async findByNombre(nombreUsuario: string): Promise<any> {
+        const usuario = await this.usuarioRepository.createQueryBuilder("usuario").where("usuario.nombreUsuario = :nombreUsuario", { nombreUsuario: nombreUsuario }).getOne();
+        return usuario;
+    }
 
-    //     if(findUsuario){
-    //         return false;
-    //     }
-    //     return true;
-
-    // }
-    
-    // create(data: CreateUsuarioDto): UsuariosEntity{
-    //     //const newUsuario: UsuariosEntity = {nombreUsuario: this.usuario.length + 1, ...data}; 
-    //     const newUsuario: UsuariosEntity = data; 
-    //     if(!this.findByNombre(data.nombreUsuario)){
-    //         throw new BadRequestException('Usser exist');
-    //     }
-      
-    //     this.usuario.unshift(newUsuario);
-    //     return newUsuario;
-    // }
-
-    // update(nombreUsuario: string, data: UpdateUsuarioDto){
-    //     const findUsuario: number = this.usuario.findIndex((usuario) => usuario.nombreUsuario === nombreUsuario);
+    async create(data: CreateUsuarioDto): Promise<any> {
         
-    //     if(findUsuario === -1){
-    //         throw new NotFoundException('User not found');
-    //     }
+        const exists = await this.findByNombre(data.nombreUsuario);
 
-    //     this.usuario[findUsuario] = {...this.usuario[findUsuario], ...data}
-
-    //     return findUsuario;
-    // }
-
-    // remove(nombreUsuario: string){
-    //     const findUsuario: number = this.usuario.findIndex((usuario) => usuario.nombreUsuario === nombreUsuario);
+        if(exists) throw new BadRequestException({message: 'Ese usuario ya existe'}) 
         
-    //     if(findUsuario === -1){
-    //         throw new NotFoundException('User not found');
-    //     }    
-    //     this.usuario = this.usuario.filter((usuario)=> usuario.nombreUsuario !== nombreUsuario);
-    // }
+        const newUsuario = this.usuarioRepository.create(data);
+        await this.usuarioRepository.save(newUsuario);
+        return newUsuario;
+    }
+
+    async update(nombreUsuario: string, data: UpdateUsuarioDto): Promise<any>{
+        const usuario = await this.findByNombre(nombreUsuario);
+
+        if(!usuario) throw new BadRequestException({message: 'Ese nombre de usuario ya existe'})
+        
+        if(data.nombreUsuario) {
+            usuario.nombreUsuario = data.nombreUsuario;        
+        }
+
+        if(data.contraseña) {
+            usuario.contraseña = data.contraseña;        
+        }
+
+        if(data.correo) {
+            usuario.correo = data.correo;        
+        }
+
+        await this.usuarioRepository.createQueryBuilder()
+                        .update(UsuariosEntity)
+                        .set({ 
+                            nombreUsuario: usuario.nombreUsuario,
+                            contraseña: usuario.contraseña,
+                            correo: usuario.correo
+                        })
+                        .where("nombreUsuario = :nombreUsuario", { nombreUsuario: nombreUsuario })
+                        .execute()
+
+        // this.usuario[findUsuario] = {...this.usuario[findUsuario], ...data}
+
+        return {message: 'usuario modificado'};
+    }
+
+    async delete(nombreUsuario: string){
+        const usuario = await this.findByNombre(nombreUsuario);
+
+        if(!usuario) throw new BadRequestException({message: 'Ese usuario no existe'})
+        
+        await this.usuarioRepository.createQueryBuilder()
+                                    .delete()
+                                    .from(UsuariosEntity)
+                                    .where("nombreUsuario = :nombreUsuario", { nombreUsuario: nombreUsuario })
+                                    .execute()
+        return {message: 'usuario eliminado'};
+
+    }
 }

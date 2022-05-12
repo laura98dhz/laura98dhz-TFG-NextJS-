@@ -4,9 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsuariosModule } from './usuarios/usuarios/usuarios.module';
-import { InmueblesController } from './inmuebles/inmuebles.controller';
 import { InmueblesModule } from './inmuebles/inmuebles.module';
-import { UsuariosController } from './usuarios/usuarios/usuarios.controller';
 
 @Global()
 @Module({
@@ -33,7 +31,7 @@ import { UsuariosController } from './usuarios/usuarios/usuarios.controller';
     UsuariosModule,
     InmueblesModule
   ],
-  controllers: [AppController, InmueblesController, UsuariosController],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
