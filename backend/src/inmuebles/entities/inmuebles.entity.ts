@@ -1,19 +1,19 @@
-import { UsuariosEntity } from "src/usuarios/usuarios/entities/usuario.entity";
+import { UsuariosEntity } from "../../usuarios/usuarios/entities/usuarios.entity"; 
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity()
-export class InmuebleEntity {
+@Entity({name: 'Inmuebles'})
+export class InmueblesEntity {
 
     @PrimaryGeneratedColumn()
     readonly id: number;
 
-    @Column()
+    @Column({type: 'varchar', length: 15, nullable: false})
     readonly ubicacion: string;
 
-    @Column()
+    @Column({type: 'varchar', length: 15, nullable: false})
     readonly tipoInmueble: string;
 
-    @Column()
+    @Column({type: 'varchar', length: 15, nullable: false})
     readonly tipoOperacion: string;
 
     @ManyToOne(() => UsuariosEntity, (usuariosEntity) => usuariosEntity.nombreUsuario, {
@@ -22,18 +22,18 @@ export class InmuebleEntity {
     @JoinColumn({ name: 'vendedor_id' })
     readonly vendedor: UsuariosEntity;
 
-    @Column()
+    @Column({type: 'int', nullable: false})
     readonly superficie: number;
 
-    @Column()
+    @Column({type: 'int', nullable: false})
     readonly habitaciones: number;
 
-    @Column()
+    @Column({type: 'int', nullable: false})
     readonly baños: number;
 
-    @Column()
+    @Column({type: 'int', nullable: false})
     readonly precio: number;
 
-    @Column()
+    @Column({type: 'varchar', length: 15, nullable: false})
     readonly descripcion: string;
 }

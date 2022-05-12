@@ -1,18 +1,19 @@
 import { Controller, Get, Post, Body, Param, Delete, Put, ParseIntPipe, HttpStatus, HttpCode, UsePipes, ValidationPipe } from '@nestjs/common';
 import { UsuariosService } from './usuarios.service';
-import { CreateUsuarioDto } from './dto/create-usuario.dto';
+import { CreateUsuarioDto } from './dto/create-usuarios.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 
 @Controller('usuarios')
 export class UsuariosController {
-  constructor(private readonly usuariosService: UsuariosService) {}
+  
+  // constructor(private readonly usuariosService: UsuariosService) {}
 
   
-  @Get()
-  @HttpCode(HttpStatus.OK)
-  findAll() {
-    return this.usuariosService.findAll();
-  }
+  // @Get()
+  // @HttpCode(HttpStatus.OK)
+  // findAll() {
+  //   return this.usuariosService.findAll();
+  // }
   
   // @Get(':id')
   // @HttpCode(HttpStatus.OK)

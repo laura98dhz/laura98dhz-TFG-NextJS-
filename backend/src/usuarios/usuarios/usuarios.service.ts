@@ -1,18 +1,25 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreateUsuarioDto } from './dto/create-usuario.dto';
+import { CreateUsuarioDto } from './dto/create-usuarios.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
-import { UsuariosEntity } from './entities/usuario.entity';
+import { UsuariosEntity } from './entities/usuarios.entity';
+import { UsuariosRepository } from './usuarios.repository';
+
 
 @Injectable()
 export class UsuariosService {
     
-    @InjectRepository(UsuariosEntity)
-    private usuario: UsuariosEntity;
-    
-    findAll(): UsuariosEntity {
-        return this.usuario;
-    }
+    constructor(
+        @InjectRepository(UsuariosEntity) private usuarioRepository: UsuariosRepository
+    ) { }
+
+    // async findAll(): Promise<UsuariosEntity[]> {
+    //     const list = await this.usuarioRepository.createQueryBuilder('nombreUsuario');
+    //     if(!list.length){
+    //         throw new NotFoundException({message: 'No hay usuarios'})
+    //     }
+    //     return list;
+    // }
 
     
 

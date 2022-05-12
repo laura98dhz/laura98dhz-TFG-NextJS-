@@ -1,5 +1,4 @@
 import { IsNotEmpty, IsString } from 'class-validator' //van a validar nuestros atributos
-import { InmuebleEntity } from 'src/inmuebles/entities/inmueble.entity';
 
 export class CreateUsuarioDto {
 

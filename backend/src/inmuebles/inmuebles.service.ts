@@ -1,60 +1,65 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { UsuariosEntity } from 'src/usuarios/usuarios/entities/usuario.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { InmueblesEntity } from './entities/inmuebles.entity';
+import { InmueblesRepository } from './inmuebles.repository';
+import { UsuariosEntity } from 'src/usuarios/usuarios/entities/usuarios.entity';
 import { CreateInmuebleDto } from './dto/create-inmueble.dto';
 import { UpdateInmuebleDto } from './dto/update-inmueble.dto';
-import { InmuebleEntity } from './entities/inmueble.entity';
 
 @Injectable()
 export class InmueblesService {
-  
-  private inmueble: InmuebleEntity[] = [];
 
-  findAll(): InmuebleEntity[] {
-    return this.inmueble ;
-  }
+    constructor(
+        @InjectRepository(InmueblesEntity) private usuarioRepository: InmueblesRepository
+    ) { }
+//   private inmueble: InmuebleEntity[] = [];
 
-  findOne(id: number): InmuebleEntity{
-      const findUsuario: InmuebleEntity = this.inmueble.find((inmueble) => inmueble.id === id);
-      if(!findUsuario){
-          throw new NotFoundException('Inmueble not found');
-      }
+//   findAll(): InmuebleEntity[] {
+//     return this.inmueble ;
+//   }
 
-      return findUsuario;
-  }
+//   findOne(id: number): InmuebleEntity{
+//       const findUsuario: InmuebleEntity = this.inmueble.find((inmueble) => inmueble.id === id);
+//       if(!findUsuario){
+//           throw new NotFoundException('Inmueble not found');
+//       }
 
-  findByUbicacion(ubicacion: string): any{
-    const findInmuebles: InmuebleEntity[] = this.inmueble.filter((inmueble) =>inmueble.ubicacion === ubicacion);
+//       return findUsuario;
+//   }
 
-    if(!findInmuebles){
-        throw new NotFoundException('Inmueble not found');
-    }
-    return findInmuebles;
-}
+//   findByUbicacion(ubicacion: string): any{
+//     const findInmuebles: InmuebleEntity[] = this.inmueble.filter((inmueble) =>inmueble.ubicacion === ubicacion);
 
-  create(data: CreateInmuebleDto, vendedor: UsuariosEntity): InmuebleEntity{
-      const newUsuario: InmuebleEntity = {id: this.inmueble.length + 1, vendedor: vendedor,...data}; 
-      this.inmueble.unshift(newUsuario);
-      return newUsuario;
-  }
+//     if(!findInmuebles){
+//         throw new NotFoundException('Inmueble not found');
+//     }
+//     return findInmuebles;
+// }
 
-  update(id: number, data: UpdateInmuebleDto){
-      const findInmueble: number = this.inmueble.findIndex((inmueble) => inmueble.id === id);
+//   create(data: CreateInmuebleDto, vendedor: UsuariosEntity): InmuebleEntity{
+//       const newUsuario: InmuebleEntity = {id: this.inmueble.length + 1, vendedor: vendedor,...data}; 
+//       this.inmueble.unshift(newUsuario);
+//       return newUsuario;
+//   }
+
+//   update(id: number, data: UpdateInmuebleDto){
+//       const findInmueble: number = this.inmueble.findIndex((inmueble) => inmueble.id === id);
       
-      if(findInmueble === -1){
-          throw new NotFoundException('Inmueble not found');
-      }
+//       if(findInmueble === -1){
+//           throw new NotFoundException('Inmueble not found');
+//       }
 
-      this.inmueble[findInmueble] = {...this.inmueble[findInmueble], ...data}
+//       this.inmueble[findInmueble] = {...this.inmueble[findInmueble], ...data}
 
-      return findInmueble;
-  }
+//       return findInmueble;
+//   }
 
-  remove(id: number){
-      const findInmueble: number = this.inmueble.findIndex((inmueble) => inmueble.id === id);
+//   remove(id: number){
+//       const findInmueble: number = this.inmueble.findIndex((inmueble) => inmueble.id === id);
       
-      if(findInmueble === -1){
-          throw new NotFoundException('Inmueble not found');
-      }    
-      this.inmueble = this.inmueble.filter((inmueble)=> inmueble.id !== id);
-  }
+//       if(findInmueble === -1){
+//           throw new NotFoundException('Inmueble not found');
+//       }    
+//       this.inmueble = this.inmueble.filter((inmueble)=> inmueble.id !== id);
+//   }
 }
