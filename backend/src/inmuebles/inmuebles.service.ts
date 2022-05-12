@@ -10,13 +10,17 @@ import { UpdateInmuebleDto } from './dto/update-inmueble.dto';
 export class InmueblesService {
 
     constructor(
-        @InjectRepository(InmueblesEntity) private usuarioRepository: InmueblesRepository
+        @InjectRepository(InmueblesEntity) private inmuebleRepository: InmueblesRepository
     ) { }
-//   private inmueble: InmuebleEntity[] = [];
 
-//   findAll(): InmuebleEntity[] {
-//     return this.inmueble ;
-//   }
+    async findAll(): Promise<any> {
+        const usuarios = await this.inmuebleRepository.createQueryBuilder("inmueble").getMany();
+
+        if (!usuarios.length) {
+            throw new NotFoundException({ message: 'No hay inmuebles' })
+        }
+        return usuarios;
+    }
 
 //   findOne(id: number): InmuebleEntity{
 //       const findUsuario: InmuebleEntity = this.inmueble.find((inmueble) => inmueble.id === id);

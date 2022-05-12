@@ -1,13 +1,10 @@
 import { InmueblesEntity } from "src/inmuebles/entities/inmuebles.entity";
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryColumn } from "typeorm";
 
 @Entity({name: 'usuarios'})
 export class UsuariosEntity{
-    
-    @PrimaryGeneratedColumn()
-    readonly id: number; 
 
-    @Column({type: 'varchar', length: 15, nullable: false})
+    @PrimaryColumn()
     readonly nombreUsuario: string;
 
     @Column({type: 'varchar', length: 15, nullable: false})
@@ -17,5 +14,5 @@ export class UsuariosEntity{
     readonly correo: string;
 
     @OneToMany(() => InmueblesEntity, (inmuebleEntity) => inmuebleEntity.vendedor)
-    inmuebles?: InmueblesEntity[]; 
+    inmuebles: InmueblesEntity[]; 
 }

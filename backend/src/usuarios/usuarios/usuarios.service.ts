@@ -18,7 +18,6 @@ export class UsuariosService {
 
     async findAll(): Promise<any> {
         const usuarios = await this.usuarioRepository.createQueryBuilder("usuario").getMany();
-        console.log(usuarios);
 
         if (!usuarios.length) {
             throw new NotFoundException({ message: 'No hay usuarios' })
@@ -68,8 +67,6 @@ export class UsuariosService {
                         })
                         .where("nombreUsuario = :nombreUsuario", { nombreUsuario: nombreUsuario })
                         .execute()
-
-        // this.usuario[findUsuario] = {...this.usuario[findUsuario], ...data}
 
         return {message: 'usuario modificado'};
     }

@@ -19,7 +19,7 @@ export class InmueblesEntity {
     @ManyToOne(() => UsuariosEntity, (usuariosEntity) => usuariosEntity.nombreUsuario, {
         onDelete: "CASCADE"
     })
-    @JoinColumn({ name: 'vendedor_id' })
+    @JoinColumn({ name: 'vendedor_nombre' })
     readonly vendedor: UsuariosEntity;
 
     @Column({type: 'int', nullable: false})

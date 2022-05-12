@@ -6,13 +6,14 @@ import { UsuariosEntity } from 'src/usuarios/usuarios/entities/usuarios.entity';
 
 @Controller('inmuebles')
 export class InmueblesController {
-  // constructor(private readonly inmueblesService: InmueblesService) {}
   
-  // @Get()
-  // @HttpCode(HttpStatus.OK)
-  // findAll() {
-  //   return this.inmueblesService.findAll();
-  // }
+  constructor(private readonly inmueblesService: InmueblesService) {}
+  
+  @Get()
+  @HttpCode(HttpStatus.OK)
+  findAll() {
+    return this.inmueblesService.findAll();
+  }
   
   // @Get(':id')
   // @HttpCode(HttpStatus.OK)
