@@ -2,7 +2,6 @@ import { BadRequestException, Injectable, NotFoundException } from '@nestjs/comm
 import { InjectRepository } from '@nestjs/typeorm';
 import { InmueblesEntity } from './entities/inmuebles.entity';
 import { InmueblesRepository } from './inmuebles.repository';
-import { UsuariosEntity } from 'src/usuarios/usuarios/entities/usuarios.entity';
 import { CreateInmuebleDto } from './dto/create-inmueble.dto';
 import { UpdateInmuebleDto } from './dto/update-inmueble.dto';
 import { getRepository } from 'typeorm';
@@ -113,12 +112,5 @@ export class InmueblesService {
         return {message: 'inmueble eliminado'};
 
     }
-//   remove(id: number){
-//       const findInmueble: number = this.inmueble.findIndex((inmueble) => inmueble.id === id);
-      
-//       if(findInmueble === -1){
-//           throw new NotFoundException('Inmueble not found');
-//       }    
-//       this.inmueble = this.inmueble.filter((inmueble)=> inmueble.id !== id);
-//   }
+
 }

@@ -2,7 +2,6 @@ import { Controller, Get, Post, Body, Param, Delete, Put, ParseIntPipe, HttpStat
 import { InmueblesService } from './inmuebles.service';
 import { CreateInmuebleDto } from './dto/create-inmueble.dto';
 import { UpdateInmuebleDto } from './dto/update-inmueble.dto';
-import { UsuariosEntity } from 'src/usuarios/usuarios/entities/usuarios.entity';
 
 @Controller('inmuebles')
 export class InmueblesController {
