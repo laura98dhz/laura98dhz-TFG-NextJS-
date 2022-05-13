@@ -5,35 +5,35 @@ import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "t
 export class InmueblesEntity {
 
     @PrimaryGeneratedColumn()
-    readonly id: number;
+    id: number;
 
     @Column({type: 'varchar', length: 15, nullable: false})
-    readonly ubicacion: string;
+    ubicacion: string;
 
     @Column({type: 'varchar', length: 15, nullable: false})
-    readonly tipoInmueble: string;
+    tipoInmueble: string;
 
     @Column({type: 'varchar', length: 15, nullable: false})
-    readonly tipoOperacion: string;
+    tipoOperacion: string;
 
     @ManyToOne(() => UsuariosEntity, (usuariosEntity) => usuariosEntity.nombreUsuario, {
         onDelete: "CASCADE"
     })
     @JoinColumn({ name: 'vendedor_nombre' })
-    readonly vendedor: UsuariosEntity;
+    vendedor: UsuariosEntity;
 
     @Column({type: 'int', nullable: false})
-    readonly superficie: number;
+    superficie: number;
 
     @Column({type: 'int', nullable: false})
-    readonly habitaciones: number;
+    habitaciones: number;
 
     @Column({type: 'int', nullable: false})
-    readonly baños: number;
+    baños: number;
 
     @Column({type: 'int', nullable: false})
-    readonly precio: number;
+    precio: number;
 
     @Column({type: 'varchar', length: 15, nullable: false})
-    readonly descripcion: string;
+    descripcion: string;
 }

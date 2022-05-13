@@ -1,13 +1,15 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { InmueblesEntity } from './entities/inmuebles.entity';
 import { InmueblesRepository } from './inmuebles.repository';
 import { UsuariosEntity } from 'src/usuarios/usuarios/entities/usuarios.entity';
 import { CreateInmuebleDto } from './dto/create-inmueble.dto';
 import { UpdateInmuebleDto } from './dto/update-inmueble.dto';
+import { getRepository } from 'typeorm';
 
 @Injectable()
 export class InmueblesService {
+    [x: string]: any;
 
     constructor(
         @InjectRepository(InmueblesEntity) private inmuebleRepository: InmueblesRepository
@@ -22,42 +24,95 @@ export class InmueblesService {
         return usuarios;
     }
 
-//   findOne(id: number): InmuebleEntity{
-//       const findUsuario: InmuebleEntity = this.inmueble.find((inmueble) => inmueble.id === id);
-//       if(!findUsuario){
-//           throw new NotFoundException('Inmueble not found');
-//       }
+    async findByUbicacion(ubicacion: string): Promise<any> {
+        const inmueble = await this.inmuebleRepository.createQueryBuilder("inmueble").where("inmueble.ubicacion = :ubicacion", { ubicacion: ubicacion }).getMany();
+        
+        if (!inmueble.length) {
+            throw new NotFoundException({ message: 'No hay inmuebles' })
+        }
 
-//       return findUsuario;
-//   }
+        return inmueble;
+    }
 
-//   findByUbicacion(ubicacion: string): any{
-//     const findInmuebles: InmuebleEntity[] = this.inmueble.filter((inmueble) =>inmueble.ubicacion === ubicacion);
+    async create(nombreUsuario: string, data: CreateInmuebleDto): Promise<any> {
+        
+        const usuario = await getRepository('UsuariosEntity').createQueryBuilder("usuario").where("usuario.nombreUsuario = :nombreUsuario", { nombreUsuario: nombreUsuario }).getOne();
 
-//     if(!findInmuebles){
-//         throw new NotFoundException('Inmueble not found');
-//     }
-//     return findInmuebles;
-// }
+        if(!usuario) throw new BadRequestException({message: 'Ese usuario no existe'}) 
+        
+        const newInmueble = this.inmuebleRepository.create(data);
+        await this.inmuebleRepository.save(newInmueble);
+        
+        return {message: 'inmueble creado'};
+    }
 
-//   create(data: CreateInmuebleDto, vendedor: UsuariosEntity): InmuebleEntity{
-//       const newUsuario: InmuebleEntity = {id: this.inmueble.length + 1, vendedor: vendedor,...data}; 
-//       this.inmueble.unshift(newUsuario);
-//       return newUsuario;
-//   }
+    async update(id: number, data: UpdateInmuebleDto): Promise<any>{
+        const inmueble = await this.inmuebleRepository.createQueryBuilder("inmueble").where("inmueble.id = :id", { id: id }).getOne();
+        if(!inmueble) throw new BadRequestException({message: 'Ese usuario no existe'})
+        
+        if(data.baños) {
+            inmueble.baños = data.baños;        
+        }
 
-//   update(id: number, data: UpdateInmuebleDto){
-//       const findInmueble: number = this.inmueble.findIndex((inmueble) => inmueble.id === id);
-      
-//       if(findInmueble === -1){
-//           throw new NotFoundException('Inmueble not found');
-//       }
+        if(data.descripcion) {
+            inmueble.descripcion = data.descripcion;        
+        }
 
-//       this.inmueble[findInmueble] = {...this.inmueble[findInmueble], ...data}
+        if(data.habitaciones) {
+            inmueble.habitaciones = data.habitaciones;        
+        }
 
-//       return findInmueble;
-//   }
+        if(data.precio) {
+            inmueble.precio = data.precio;        
+        }
 
+        if(data.superficie) {
+            inmueble.superficie = data.superficie;        
+        }
+
+        if(data.tipoInmueble) {
+            inmueble.tipoInmueble = data.tipoInmueble;        
+        }
+
+        if(data.tipoOperacion) {
+            inmueble.tipoOperacion = data.tipoOperacion;        
+        }
+
+        if(data.ubicacion) {
+            inmueble.ubicacion = data.ubicacion;        
+        }
+
+        await this.inmuebleRepository.createQueryBuilder()
+                        .update(InmueblesEntity)
+                        .set({ 
+                            baños: inmueble.baños,
+                            descripcion: inmueble.descripcion,
+                            habitaciones: inmueble.habitaciones,
+                            precio: inmueble.precio,
+                            superficie: inmueble.superficie,
+                            tipoInmueble: inmueble.tipoInmueble,
+                            tipoOperacion: inmueble.tipoOperacion,
+                            ubicacion: inmueble.ubicacion
+                        })
+                        .where("id = :id", { id: id })
+                        .execute()
+
+        return {message: 'usuario modificado'};
+    }
+
+    async delete(id: number){
+        const inmueble = await this.inmuebleRepository.createQueryBuilder("inmueble").where("inmueble.id = :id", { id: id }).getOne();
+
+        if(!inmueble) throw new BadRequestException({message: 'Ese inmueble no existe'})
+        
+        await this.inmuebleRepository.createQueryBuilder()
+                                    .delete()
+                                    .from(InmueblesEntity)
+                                    .where("id = :id", { id: id })
+                                    .execute()
+        return {message: 'inmueble eliminado'};
+
+    }
 //   remove(id: number){
 //       const findInmueble: number = this.inmueble.findIndex((inmueble) => inmueble.id === id);
       

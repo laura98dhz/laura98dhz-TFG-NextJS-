@@ -15,35 +15,29 @@ export class InmueblesController {
     return this.inmueblesService.findAll();
   }
   
-  // @Get(':id')
-  // @HttpCode(HttpStatus.OK)
-  // findOne(@Param('id', ParseIntPipe) id: number) {
-  //   return this.inmueblesService.findOne(+id);
-  // }
+  @Get(':ubicacion')
+  @HttpCode(HttpStatus.OK)
+  findByUbicacion(@Param('ubicacion') ubicacion: string) {
+    return this.inmueblesService.findByUbicacion(ubicacion);
+  }
 
-  // @Post(':ubicacion')
-  // @HttpCode(HttpStatus.OK)
-  // findByUbicacion(@Param('ubicacion') ubicacion: string) {
-  //   return this.inmueblesService.findByUbicacion(ubicacion);
-  // }
+  @UsePipes(new ValidationPipe({whitelist:true}))
+  @Post('/:vendedor')
+  @HttpCode(HttpStatus.CREATED)
+  create(@Param('vendedor') vendedor: string, @Body() data: CreateInmuebleDto) {
+    return this.inmueblesService.create(vendedor, data);
+  }
 
-  // @UsePipes(new ValidationPipe({whitelist:true}))
-  // @Post('/crear/:vendedor')
-  // @HttpCode(HttpStatus.CREATED)
-  // create(@Param('vendedor') vendedor: UsuariosEntity, @Body() data: CreateInmuebleDto) {
-  //   return this.inmueblesService.create(data, vendedor);
-  // }
+  @UsePipes(new ValidationPipe({whitelist:true}))
+  @Put('/:id')
+  @HttpCode(HttpStatus.OK)
+  update(@Param('id', ParseIntPipe) id: number, @Body() data: UpdateInmuebleDto) {
+    return this.inmueblesService.update(id,data);
+  }
 
-  // @UsePipes(new ValidationPipe({whitelist:true}))
-  // @Put(':id')
-  // @HttpCode(HttpStatus.OK)
-  // update(@Param('id', ParseIntPipe) id: number, @Body() data: UpdateInmuebleDto) {
-  //   return this.inmueblesService.update(+id, data);
-  // }
-
-  // @Delete(':id')
-  // @HttpCode(HttpStatus.OK)
-  // remove(@Param('id', ParseIntPipe) id: number) {
-  //   return this.inmueblesService.remove(+id);
-  // }
+  @Delete(':id')
+  @HttpCode(HttpStatus.OK)
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.inmueblesService.delete(id);
+  }
 }
