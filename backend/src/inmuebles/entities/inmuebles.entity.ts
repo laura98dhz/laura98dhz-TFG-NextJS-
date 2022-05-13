@@ -1,5 +1,6 @@
 import { UsuariosEntity } from "../../usuarios/usuarios/entities/usuarios.entity"; 
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { ImagenesEntity } from "src/imagenes/entities/imagenes.entity"; 
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity({name: 'Inmuebles'})
 export class InmueblesEntity {
@@ -36,4 +37,7 @@ export class InmueblesEntity {
 
     @Column({type: 'varchar', length: 15, nullable: false})
     descripcion: string;
+
+    @OneToMany(() => ImagenesEntity, (imagenesEntity) => imagenesEntity.inmueble_id)
+    imagenes: ImagenesEntity[]; 
 }
