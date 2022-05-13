@@ -5,6 +5,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsuariosModule } from './usuarios/usuarios/usuarios.module';
 import { InmueblesModule } from './inmuebles/inmuebles.module';
+import { ImagenesController } from './imagenes/imagenes.controller';
+import { ImagenesService } from './imagenes/imagenes.service';
+import { ImagenesModule } from './imagenes/imagenes.module';
 
 @Global()
 @Module({
@@ -29,9 +32,10 @@ import { InmueblesModule } from './inmuebles/inmuebles.module';
       inject: [ConfigService],
     }),
     UsuariosModule,
-    InmueblesModule
+    InmueblesModule,
+    ImagenesModule
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, ImagenesController],
+  providers: [AppService, ImagenesService],
 })
 export class AppModule {}
