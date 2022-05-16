@@ -6,6 +6,7 @@ import Pisos from './components/Pisos/Pisos';
 import MainPrincipal from './components/Main/MainPrincipal'
 import Acceder from './components/Acceder/Acceder';
 import { useState } from 'react';
+import AjustesUsuario from './components/AjustesUsuario/AjustesUsuario';
 
 function App() {
 
@@ -14,6 +15,8 @@ function App() {
   const [cargarFooter, setCargarFooter] = useState(true);
   const [cargarAcceder, setCargarAcceder] = useState(false);
   const [cargarMain, setCargarMain] = useState(true);
+  const [cargarAjustesUsuario, setCargarAjustesUsuario] = useState(false);
+
   const [opcionElegida, setOpcionElegida] = useState("");
   const [ubicacion, setUbicacion] = useState("");
   
@@ -27,7 +30,8 @@ function App() {
   function mostrarMain(){
     setCargarMain(true);
     setCargarPisos(false);
-    setCargarAcceder(false)
+    setCargarAcceder(false);
+    setCargarAjustesUsuario(false)
   }
 
   function mostrarAcceder(){
@@ -63,12 +67,20 @@ function App() {
     setCargarFooter(true);
     sessionStorage.setItem('usuario', usuario.nombreUsuario)
   }
+
+  function ajustesUsuario(){
+    setCargarAjustesUsuario(true);
+    setCargarMain(false);
+    setCargarPisos(false);
+  }
+
   return (
     <>
-      { cargarHeader ?  <Header handleOnClick={mostrarMain} accederOnClick={mostrarAcceder} usuario={sessionStorage.getItem('usuario')}/> : ""}
+      { cargarHeader ?  <Header handleOnClick={mostrarMain} accederOnClick={mostrarAcceder} usuario={sessionStorage.getItem('usuario')} ajustesOnClick={ajustesUsuario}/> : ""}
       { cargarAcceder ? <Acceder cerrarOnCLick={cerrarAcceder} usuarioOnClick={usuarioCorrecto}/> : "" }
       { cargarMain ? <MainPrincipal handleOnClick={mostrarInmuebles} opcionOnClick={selectOpcionTransaccion} ubicacionOnClick={ubicacionElegida}/> : "" }
       { cargarPisos ? <Pisos ubicacion={ubicacion} opcion={opcionElegida}/> : "" }
+      { cargarAjustesUsuario ? <AjustesUsuario/> : "" }
       { cargarFooter ? <Footer/> : "" }
     </>
   );

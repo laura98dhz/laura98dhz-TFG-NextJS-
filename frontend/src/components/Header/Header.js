@@ -12,6 +12,11 @@ function Header(props){
     function cargarAcceder(){
         props.accederOnClick();
     }
+
+    function miUsuario(){
+        props.ajustesOnClick()
+    }
+    
     return(
         <header className='header'>
             <img src={logo} className='logo' onClick={()=>cargarMain()}/>
@@ -30,7 +35,7 @@ function Header(props){
                 ) : (
                     <div className='usuario'>
                         <i class="fa-solid fa-user usuario-icono"></i>
-                        <p>{props.usuario}</p>
+                        <p onClick={()=>miUsuario()}>{props.usuario}</p>
                     </div>
                 )}
                 
