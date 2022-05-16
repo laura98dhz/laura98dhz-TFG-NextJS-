@@ -67,7 +67,7 @@ function Acceder (props){
                     </div>
 
                 </form>
-                <span className="acceder-cruz" onClick={()=> cerrarAcceder()}>X</span>
+                <i class="fa-solid fa-xmark acceder-cruz" onClick={()=> cerrarAcceder()}></i>
             </div>
         </section>
         </>

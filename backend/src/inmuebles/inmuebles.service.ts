@@ -8,7 +8,6 @@ import { getRepository } from 'typeorm';
 
 @Injectable()
 export class InmueblesService {
-    [x: string]: any;
 
     constructor(
         @InjectRepository(InmueblesEntity) private inmuebleRepository: InmueblesRepository
@@ -35,14 +34,13 @@ export class InmueblesService {
 
     async create(nombreUsuario: string, data: CreateInmuebleDto): Promise<any> {
         
-        const usuario = await getRepository('UsuariosEntity').createQueryBuilder("usuario").where("usuario.nombreUsuario = :nombreUsuario", { nombreUsuario: nombreUsuario }).getOne();
-
+        const usuario = await getRepository('UsuariosEntity').createQueryBuilder("usuario");
         if(!usuario) throw new BadRequestException({message: 'Ese usuario no existe'}) 
         
         const newInmueble = this.inmuebleRepository.create(data);
         await this.inmuebleRepository.save(newInmueble);
         
-        return {message: 'inmueble creado'};
+        return newInmueble;
     }
 
     async update(id: number, data: UpdateInmuebleDto): Promise<any>{

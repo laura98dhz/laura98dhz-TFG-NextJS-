@@ -66,12 +66,18 @@ function App() {
     setCargarMain(true);
     setCargarFooter(true);
     sessionStorage.setItem('usuario', usuario.nombreUsuario)
+    sessionStorage.setItem('correo', usuario.correo)
   }
+  
 
   function ajustesUsuario(){
     setCargarAjustesUsuario(true);
     setCargarMain(false);
     setCargarPisos(false);
+  }
+  function cerrarAjustesUsuario(){
+    setCargarAjustesUsuario(false);
+    setCargarMain(true);
   }
 
   return (
@@ -80,7 +86,7 @@ function App() {
       { cargarAcceder ? <Acceder cerrarOnCLick={cerrarAcceder} usuarioOnClick={usuarioCorrecto}/> : "" }
       { cargarMain ? <MainPrincipal handleOnClick={mostrarInmuebles} opcionOnClick={selectOpcionTransaccion} ubicacionOnClick={ubicacionElegida}/> : "" }
       { cargarPisos ? <Pisos ubicacion={ubicacion} opcion={opcionElegida}/> : "" }
-      { cargarAjustesUsuario ? <AjustesUsuario/> : "" }
+      { cargarAjustesUsuario ? <AjustesUsuario cerrarAjustes={cerrarAjustesUsuario}/> : "" }
       { cargarFooter ? <Footer/> : "" }
     </>
   );
