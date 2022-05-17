@@ -6,11 +6,16 @@ import { CreateInmuebleDto } from './dto/create-inmueble.dto';
 import { UpdateInmuebleDto } from './dto/update-inmueble.dto';
 import { getRepository } from 'typeorm';
 
+import { UsuariosService } from 'src/usuarios/usuarios/usuarios.service';
+import { UsuariosEntity } from 'src/usuarios/usuarios/entities/usuarios.entity';
+import { UsuariosRepository } from 'src/usuarios/usuarios/usuarios.repository';
+
 @Injectable()
 export class InmueblesService {
 
     constructor(
-        @InjectRepository(InmueblesEntity) private inmuebleRepository: InmueblesRepository
+        @InjectRepository(InmueblesEntity) private inmuebleRepository: InmueblesRepository,
+        @InjectRepository(UsuariosEntity) private usuarioRepository: UsuariosRepository
     ) { }
 
     async findAll(): Promise<any> {
@@ -34,10 +39,11 @@ export class InmueblesService {
 
     async create(nombreUsuario: string, data: CreateInmuebleDto): Promise<any> {
         
-        const usuario = await getRepository('UsuariosEntity').createQueryBuilder("usuario");
+        const usuario = getRepository('UsuariosEntity').createQueryBuilder("usuario");
         if(!usuario) throw new BadRequestException({message: 'Ese usuario no existe'}) 
-        
+
         const newInmueble = this.inmuebleRepository.create(data);
+        newInmueble.vendedor = await this.usuarioRepository.createQueryBuilder("usuario").where("usuario.nombreUsuario = :nombreUsuario", { nombreUsuario: nombreUsuario }).getOne();
         await this.inmuebleRepository.save(newInmueble);
         
         return newInmueble;

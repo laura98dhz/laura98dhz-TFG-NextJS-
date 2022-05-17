@@ -17,9 +17,6 @@ export class InmueblesEntity {
     @Column({type: 'varchar', length: 15, nullable: false})
     tipoOperacion: string;
 
-    @Column()
-    nombreVendedor: string;
-    
     @ManyToOne(() => UsuariosEntity, (usuariosEntity) => usuariosEntity.nombreUsuario, {
         onDelete: "CASCADE",
         onUpdate: "CASCADE"

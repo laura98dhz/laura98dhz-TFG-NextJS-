@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsNotEmpty, IsNumber, IsPositive, IsString } from "class-validator";
 import { CreateUsuarioDto } from "src/usuarios/usuarios/dto/create-usuarios.dto";
 import { UsuariosEntity } from "src/usuarios/usuarios/entities/usuarios.entity";
 
@@ -18,18 +18,22 @@ export class CreateInmuebleDto {
     
     @IsNotEmpty()
     @IsNumber()
+    @IsPositive()
     readonly superficie: number;
 
     @IsNotEmpty()
     @IsNumber()
+    @IsPositive()
     readonly habitaciones: number;
 
     @IsNotEmpty()
     @IsNumber()
+    @IsPositive()
     readonly baños: number;
 
     @IsNotEmpty()
     @IsNumber()
+    @IsPositive()
     readonly precio: number;
 
     @IsNotEmpty()
@@ -38,5 +42,5 @@ export class CreateInmuebleDto {
 
     @IsNotEmpty()
     @IsString()
-    readonly nombreVendedor: CreateUsuarioDto;
+    readonly nombreVendedor: string;
 }
