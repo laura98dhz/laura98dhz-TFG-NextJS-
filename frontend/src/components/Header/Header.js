@@ -42,11 +42,11 @@ function Header(props){
                 
                 <div className='idioma'>
                     <select className='idioma-select'>
-                                <option>Español</option>
-                                <option>English</option>
-                                <option>Catalá</option>
-                                <option>Deutsche</option>
-                            </select> 
+                        <option>Español</option>
+                        <option>English</option>
+                        <option>Catalá</option>
+                        <option>Deutsche</option>
+                    </select> 
                 </div>
                 
             </div>

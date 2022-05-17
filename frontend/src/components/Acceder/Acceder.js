@@ -9,10 +9,6 @@ function Acceder (props){
     const usuario = useRef("");
     const contraseña = useRef("");
 
-    function cerrarAcceder(){
-        props.cerrarOnCLick();
-    }
-
     function comprobarUsuario(e, usuario, contraseña){
         e.nativeEvent.preventDefault();
 
@@ -34,6 +30,10 @@ function Acceder (props){
         }
     }
 
+    function registrarUsuario(){
+        props.crearUsuarioOnClick();
+    }
+
     return(
         <>
         <div className="acceder-container-atras">
@@ -52,7 +52,6 @@ function Acceder (props){
                     <div className="acceder-contraseña">
                         <i class="fa-solid fa-key acceder-contraseña-icono"></i>
                         <input ref={contraseña} type='password' className="acceder-contraseña-caja" placeholder="Contraseña"></input>
-                        <i class="fa-solid fa-eye acceder-contraseña-icono"></i>
                     </div>
                     <div className="acceder-redes">
                         <i class="fa-brands fa-facebook acceder-redes-facebook"></i>
@@ -60,14 +59,14 @@ function Acceder (props){
                     </div>
                     <button className="acceder-boton" onClick={(e)=>comprobarUsuario(e, usuario, contraseña)}>Acceder</button>
                     <div className="acceder-recordar-contraseña">
-                        <a href="" className="acceder-recordar-contraseña-texto">¿Has Olvidado La Contraseña?</a>
+                        <a className="acceder-recordar-contraseña-texto">¿Has Olvidado La Contraseña?</a>
                     </div>
                     <div className="acceder-registrar">
-                        <a href="" className="acceder-registrar-texto">¿No tienes cuenta? Registrate</a>
+                        <a onClick={()=>registrarUsuario()} className="acceder-registrar-texto">¿No tienes cuenta? Registrate</a>
                     </div>
 
                 </form>
-                <i class="fa-solid fa-xmark acceder-cruz" onClick={()=> cerrarAcceder()}></i>
+                <i class="fa-solid fa-xmark acceder-cruz" onClick={()=> props.cerrarOnCLick()}></i>
             </div>
         </section>
         </>

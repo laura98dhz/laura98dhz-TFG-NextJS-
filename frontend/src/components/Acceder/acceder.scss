@@ -83,12 +83,18 @@
 
         &-facebook {
             color: rgb(59, 89, 152);
-            cursor: pointer;
         }
 
         &-google {
             color: rgb(219, 74, 57);
+        }
+        
+        &-facebook, &-google{
             cursor: pointer;
+            transition: all ease .5s;
+            &:hover{
+                transform: scale(1.1);
+            }
         }
     }
 
@@ -121,9 +127,11 @@
         &-texto {
             color: rgb(70, 70, 70);
             transition: all ease .5s;
+            cursor: pointer;
 
             &:hover {
                 color: rgb(57, 102, 102);
+                transform: scale(1.1);
             }
         }
     }

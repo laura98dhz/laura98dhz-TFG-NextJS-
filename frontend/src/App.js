@@ -7,6 +7,7 @@ import MainPrincipal from './components/Main/MainPrincipal'
 import Acceder from './components/Acceder/Acceder';
 import { useState } from 'react';
 import AjustesUsuario from './components/AjustesUsuario/AjustesUsuario';
+import Registro from './components/Registro/Registro';
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
   const [cargarAcceder, setCargarAcceder] = useState(false);
   const [cargarMain, setCargarMain] = useState(true);
   const [cargarAjustesUsuario, setCargarAjustesUsuario] = useState(false);
+  const [cargarRegistro, setCargarRegistro] = useState(false);
 
   const [opcionElegida, setOpcionElegida] = useState("");
   const [ubicacion, setUbicacion] = useState("");
@@ -24,14 +26,19 @@ function App() {
 
   function mostrarInmuebles(){
     setCargarPisos(true);
-    setCargarMain(false)
+    setCargarMain(false);
+    setCargarHeader(true);
+    setCargarFooter(true);
   }
 
   function mostrarMain(){
     setCargarMain(true);
     setCargarPisos(false);
     setCargarAcceder(false);
-    setCargarAjustesUsuario(false)
+    setCargarAjustesUsuario(false);
+    setCargarRegistro(false);
+    setCargarHeader(true);
+    setCargarFooter(true);
   }
 
   function mostrarAcceder(){
@@ -40,7 +47,6 @@ function App() {
     setCargarPisos(false);
     setCargarHeader(false);
     setCargarFooter(false);
-    
   }
 
   function cerrarAcceder(){
@@ -48,6 +54,26 @@ function App() {
     setCargarHeader(true);
     setCargarMain(true);
     setCargarFooter(true);
+  }
+
+  function ajustesUsuario(){
+    setCargarAjustesUsuario(true);
+    setCargarMain(false);
+    setCargarPisos(false);
+  }
+
+  function cerrarAjustesUsuario(){
+    setCargarAjustesUsuario(false);
+    setCargarMain(true);
+  }
+
+  function cargarRegistroUsuario(){
+    setCargarRegistro(true);
+    setCargarAcceder(false);
+    setCargarHeader(false);
+    setCargarMain(false);
+    setCargarPisos(false);
+    setCargarFooter(false);
   }
   
   //Guardar datos
@@ -69,25 +95,15 @@ function App() {
     sessionStorage.setItem('correo', usuario.correo)
   }
   
-
-  function ajustesUsuario(){
-    setCargarAjustesUsuario(true);
-    setCargarMain(false);
-    setCargarPisos(false);
-  }
-  function cerrarAjustesUsuario(){
-    setCargarAjustesUsuario(false);
-    setCargarMain(true);
-  }
-
   return (
     <>
       { cargarHeader ?  <Header handleOnClick={mostrarMain} accederOnClick={mostrarAcceder} usuario={sessionStorage.getItem('usuario')} ajustesOnClick={ajustesUsuario}/> : ""}
-      { cargarAcceder ? <Acceder cerrarOnCLick={cerrarAcceder} usuarioOnClick={usuarioCorrecto}/> : "" }
+      { cargarAcceder ? <Acceder cerrarOnCLick={cerrarAcceder} usuarioOnClick={usuarioCorrecto} crearUsuarioOnClick={cargarRegistroUsuario}/> : "" }
       { cargarMain ? <MainPrincipal handleOnClick={mostrarInmuebles} opcionOnClick={selectOpcionTransaccion} ubicacionOnClick={ubicacionElegida}/> : "" }
       { cargarPisos ? <Pisos ubicacion={ubicacion} opcion={opcionElegida}/> : "" }
       { cargarAjustesUsuario ? <AjustesUsuario cerrarAjustes={cerrarAjustesUsuario}/> : "" }
       { cargarFooter ? <Footer/> : "" }
+      { cargarRegistro ? <Registro cargarRegistro={cargarRegistroUsuario} cerrarRegistro={mostrarMain}/> : "" }
     </>
   );
 }

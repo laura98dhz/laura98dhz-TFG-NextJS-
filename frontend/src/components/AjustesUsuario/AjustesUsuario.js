@@ -15,48 +15,99 @@ export default function AjustesUsuario(props){
 
     function actualizarDatos(e){
         e.nativeEvent.preventDefault();
-        console.log(sessionStorage.getItem('usuario'))
         
+        if(usuario.current.value && contraseña.current.value && correo.current.value){
+           
+            fetch("http://localhost:8080/usuarios"+'/'+ sessionStorage.getItem('usuario'), { 
+            'method': 'PUT',
+            'headers': { 'Content-Type': 'application/json' },    
+            'body': JSON.stringify({
+                'nombreUsuario': usuario.current.value,
+                'contraseña': contraseña.current.value,
+                'correo': correo.current.value
+            })
+            })
+            .catch(err => console.log('Solicitud fallida', err));
+            cerrarSesion(e);
+        }
+
+        if(usuario.current.value && contraseña.current.value ){
+            fetch("http://localhost:8080/usuarios"+'/'+ sessionStorage.getItem('usuario'), { 
+                'method': 'PUT',
+                'headers': { 'Content-Type': 'application/json' },    
+                'body': JSON.stringify({
+                    'nombreUsuario': usuario.current.value,
+                    'contraseña': contraseña.current.value
+                })
+                })
+                .catch(err => console.log('Solicitud fallida', err));
+                cerrarSesion(e);
+        }
+        if(usuario.current.value && correo.current.value){
+           
+            fetch("http://localhost:8080/usuarios"+'/'+ sessionStorage.getItem('usuario'), { 
+            'method': 'PUT',
+            'headers': { 'Content-Type': 'application/json' },    
+            'body': JSON.stringify({
+                'nombreUsuario': usuario.current.value,
+                'correo': correo.current.value
+            })
+            })
+            .catch(err => console.log('Solicitud fallida', err));
+            cerrarSesion(e);
+        }
+
+        if(contraseña.current.value && correo.current.value){
+           
+            fetch("http://localhost:8080/usuarios"+'/'+ sessionStorage.getItem('usuario'), { 
+            'method': 'PUT',
+            'headers': { 'Content-Type': 'application/json' },    
+            'body': JSON.stringify({
+                'contraseña': contraseña.current.value,
+                'correo': correo.current.value
+            })
+            })
+            .catch(err => console.log('Solicitud fallida', err));
+            cerrarSesion(e);
+        }
+
         if(usuario.current.value){
-            console.log(1)
-            // fetch("http://localhost:8080/usuarios"+'/'+ sessionStorage.getItem('usuario'), { 
-            // 'method': 'PUT',
-            // 'headers': { 'Content-Type': 'application/json' },    
-            // 'body': JSON.stringify({
-            //     'nombreUsuario': usuario.current.value,
-            //     // 'correo': correo.current.value,
-            //     // 'contraseña': contraseña.current.value,
-            // })
-            // })
-            // .catch(err => console.log('Solicitud fallida', err));
+           
+            fetch("http://localhost:8080/usuarios"+'/'+ sessionStorage.getItem('usuario'), { 
+            'method': 'PUT',
+            'headers': { 'Content-Type': 'application/json' },    
+            'body': JSON.stringify({
+                'nombreUsuario': usuario.current.value,
+            })
+            })
+            .catch(err => console.log('Solicitud fallida', err));
+            cerrarSesion(e);
         }
 
         if(contraseña.current.value){
-            console.log(2)
-            // fetch("http://localhost:8080/usuarios"+'/'+ sessionStorage.getItem('usuario'), { 
-            // 'method': 'PUT',
-            // 'headers': { 'Content-Type': 'application/json' },    
-            // 'body': JSON.stringify({
-            //     'nombreUsuario': usuario.current.value,
-            //     // 'correo': correo.current.value,
-            //     // 'contraseña': contraseña.current.value,
-            // })
-            // })
-            // .catch(err => console.log('Solicitud fallida', err));
+           
+            fetch("http://localhost:8080/usuarios"+'/'+ sessionStorage.getItem('usuario'), { 
+            'method': 'PUT',
+            'headers': { 'Content-Type': 'application/json' },    
+            'body': JSON.stringify({
+                'contraseña': contraseña.current.value,
+            })
+            })
+            .catch(err => console.log('Solicitud fallida', err));
+            cerrarSesion(e);
         }
 
         if(correo.current.value){
-            console.log(3)
-            // fetch("http://localhost:8080/usuarios"+'/'+ sessionStorage.getItem('usuario'), { 
-            // 'method': 'PUT',
-            // 'headers': { 'Content-Type': 'application/json' },    
-            // 'body': JSON.stringify({
-            //     'nombreUsuario': usuario.current.value,
-            //     // 'correo': correo.current.value,
-            //     // 'contraseña': contraseña.current.value,
-            // })
-            // })
-            // .catch(err => console.log('Solicitud fallida', err));
+           
+            fetch("http://localhost:8080/usuarios"+'/'+ sessionStorage.getItem('usuario'), { 
+            'method': 'PUT',
+            'headers': { 'Content-Type': 'application/json' },    
+            'body': JSON.stringify({
+                'correo': correo.current.value
+            })
+            })
+            .catch(err => console.log('Solicitud fallida', err));
+            cerrarSesion(e);
         }
     }
 
