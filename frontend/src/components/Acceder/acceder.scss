@@ -1,113 +1,138 @@
-.acceder{
+.acceder {
     display: flex;
     justify-content: center;
     width: 100%;
     height: 100vh;
-    
-&-container{
-    background-color: rgb(241, 241, 241);
-    border-radius: 1rem;
-    width: 35%;
-    padding: 4rem;
-    position: fixed;
-    top:50%;
-    transform: translateY(-50%);
-    display: flex;
-    justify-content: center;
-}
-&-form{
-    display: flex;
-    flex-direction: column;
-}
-&-titulo{
-    display: flex;
-    justify-content: center;
-    margin-bottom: 4rem;
-}
 
-&-usuario,&-contraseña{
-    display: flex;
-    margin: 0 auto;
-    margin-bottom: 3rem;
-    border-radius: 5px;
-    height: 5rem;
-    width: 75%;
-    background-color: white;
-
-    &-icono{
+    &-container {
+        background-color: rgb(241, 241, 241);
+        border-radius: 1rem;
+        width: 35%;
+        padding: 4rem;
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
         display: flex;
-        align-items: center;
-        margin-right: 1rem;
-        margin-left: 1rem;
-        color: rgb(57, 102, 102);
-        &:last-child{
-            cursor: pointer;    
-        }
+        justify-content: center;
     }
-    &-caja{
-        border: none;
-        outline: none;
-        font-size: 2rem;
-        width: 100%;
-        color: rgb(70,70,70);
-        font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+    &-cruz{
+        height: 100%;
+        padding: .5rem;
         border-radius: 5px;
-    }
-}
-&-redes{
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 2rem;
-    width: 25%;
-    font-size: 3rem;
-
-    &-facebook{
-        color: rgb(59, 89, 152);
+        transform: translate(5rem);
         cursor: pointer;
-    }
-    &-google{
-        color: rgb(219, 74, 57);
-        cursor: pointer;
-    }
-}
-&-boton{
-    width: 35%;
-    margin: 0 auto;
-    margin-bottom: 2rem;
-    height: 4rem;        
-    color: rgb(70, 70, 70);
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    background-color: white;
-    border: .5px rgb(241, 241, 241) solid;
-    border-radius: 2px;
-    cursor: pointer;
-    transition: all ease .5s;
-
-    &:hover{
-        background-color: rgb(176, 158, 128);
-        color: white;
-    }
-}
-&-recordar-contraseña, &-registrar{
-    display: flex;
-    justify-content: center; 
-    margin-bottom: 1rem;
-    font-size: 1.5rem; 
-    &-texto{
-        color: rgb(70,70,70);
-        transition: all ease .5s;
+        transition: all .5s ease;
 
         &:hover{
-            color: rgb(57, 102, 102);
+            background-color: rgb(227, 227, 227);
         }
-    }    
-}
-&-container-atras{
-    background-color: rgba(0, 0, 0, 0.7);
-    width: 100%;
-    height: 100vh;
-    position: absolute;
-    
-}
+    }
+
+    &-form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &-titulo {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 4rem;
+    }
+
+    &-usuario,
+    &-contraseña {
+        display: flex;
+        margin: 0 auto;
+        margin-bottom: 3rem;
+        border-radius: 5px;
+        height: 5rem;
+        width: 75%;
+        background-color: white;
+
+        &-icono {
+            display: flex;
+            align-items: center;
+            margin-right: 1rem;
+            margin-left: 1rem;
+            color: rgb(57, 102, 102);
+
+            &:last-child {
+                cursor: pointer;
+            }
+        }
+
+        &-caja {
+            border: none;
+            outline: none;
+            font-size: 2rem;
+            width: 100%;
+            color: rgb(70, 70, 70);
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            border-radius: 5px;
+        }
+    }
+
+    &-redes {
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 2rem;
+        width: 25%;
+        font-size: 3rem;
+
+        &-facebook {
+            color: rgb(59, 89, 152);
+            cursor: pointer;
+        }
+
+        &-google {
+            color: rgb(219, 74, 57);
+            cursor: pointer;
+        }
+    }
+
+    &-boton {
+        width: 35%;
+        margin: 0 auto;
+        margin-bottom: 2rem;
+        height: 4rem;
+        color: rgb(70, 70, 70);
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        background-color: white;
+        border: .5px rgb(241, 241, 241) solid;
+        border-radius: 2px;
+        cursor: pointer;
+        transition: all ease .5s;
+
+        &:hover {
+            background-color: rgb(176, 158, 128);
+            color: white;
+        }
+    }
+
+    &-recordar-contraseña,
+    &-registrar {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+
+        &-texto {
+            color: rgb(70, 70, 70);
+            transition: all ease .5s;
+
+            &:hover {
+                color: rgb(57, 102, 102);
+            }
+        }
+    }
+
+    &-container-atras {
+        background-color: rgb(70, 70, 70);
+        width: 100%;
+        height: 100vh;
+        position: absolute;
+        position: fixed;
+    }
 }

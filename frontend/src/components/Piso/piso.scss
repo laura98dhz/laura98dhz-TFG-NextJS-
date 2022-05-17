@@ -1,0 +1,40 @@
+.piso{
+    
+    &--container{
+        border: 1px solid black;
+        display: flex;
+        width: 100%;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+    &--foto{
+        border: 1px solid black;
+        width: 30%;
+        height: 20rem;
+        background-color: black;
+    }
+    &--detalles{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 2rem;
+        padding-left: 6rem;
+
+        &--precio{
+            padding-bottom: 2rem;
+            font-weight: 900;
+        }
+
+        &--ubicacion{
+            padding-bottom: 2rem;
+        }
+
+        &--otrosDetalles{
+            display: flex;
+            
+            &>p{
+                margin-right: 2rem;    
+            }
+        }
+    }
+}

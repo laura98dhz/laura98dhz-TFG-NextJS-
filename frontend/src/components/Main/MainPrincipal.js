@@ -1,7 +1,21 @@
 import logo from '../../Recursos/img/logo2.png';
 import CalculadoraHipoteca from '../CalculadoraHipoteca/CalculadoraHipoteca';
+import { useRef } from 'react';
+function MainPrincipal(props){
 
-function MainPrincipal(){
+    const buscar = useRef(null);
+
+    function selectOpcionTransaccion(e, opcion){
+        e.nativeEvent.preventDefault();
+        props.opcionOnClick(opcion)
+    }
+    
+    function buscarInmueble(e, ubicacion){
+        e.nativeEvent.preventDefault();
+        props.ubicacionOnClick(ubicacion.current.value)
+        props.handleOnClick();
+    }
+    
     return(
         <main>
             <section className='main-principal'>
@@ -14,22 +28,11 @@ function MainPrincipal(){
                         <h2 className='main-principal-container-buscar-titulo'>Encuentre la casa de sus sueños</h2>
                         <form className='main-principal-container-buscar-form'>
                             <div className='main-principal-container-buscar-form-botones'>
-                                <button className='main-principal-container-buscar-form-botones--1'>Comprar</button>
-                                <button className='main-principal-container-buscar-form-botones--2'>Alquilar</button>
+                                <button className='main-principal-container-buscar-form-botones--1' onClick={(e)=>selectOpcionTransaccion(e, "Venta")}>Comprar</button>
+                                <button className='main-principal-container-buscar-form-botones--2' onClick={(e)=>selectOpcionTransaccion(e, "Alquiler")}>Alquilar</button>
                             </div>
-                            
-                            <select className='main-principal-container-buscar-form-select'>
-                                <option>Vivienda</option>
-                                <option>Obra Nueva</option>
-                                <option>Local y Nave</option>
-                                <option>Garaje</option>
-                                <option>Oficina</option>
-                                <option>Trastero</option>
-                                <option>Terreno</option>
-                                <option>Edificio</option>
-                            </select> 
-                            <input type='text' className='main-principal-container-buscar-form-text'></input>
-                            <button className='main-principal-container-buscar-form-text-boton'>
+                            <input ref={buscar} type='text' className='main-principal-container-buscar-form-text'></input>
+                            <button className='main-principal-container-buscar-form-text-boton' onClick={(e)=>buscarInmueble(e, buscar)}>
                                 <i class="fa-solid fa-magnifying-glass main-principal-container-buscar-form-text-boton-icono"></i>
                             </button>  
                         </form>

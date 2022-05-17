@@ -59,8 +59,7 @@ function Footer(){
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3036.99901642151!2d-3.688797784667443!3d40.43102067936335!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd42289461055981%3A0x752a4c5d14b1455c!2sC.%20Serrano%2C%2078%2C%2028006%20Madrid!5e0!3m2!1ses!2ses!4v1647451062970!5m2!1ses!2ses"></iframe>
                     </li>
                 </ul>
-            </div> 
-                
+            </div>       
         </footer>
     )
 }

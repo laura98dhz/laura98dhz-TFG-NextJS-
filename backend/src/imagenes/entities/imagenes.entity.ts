@@ -17,7 +17,8 @@ export class ImagenesEntity {
     data: string;
 
     @ManyToOne(() => InmueblesEntity, (inmueblesEntity) => inmueblesEntity.id, {
-        onDelete: "CASCADE"
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE"
     })
     @JoinColumn({ name: 'inmueble_id' })
     inmueble_id: InmueblesEntity;

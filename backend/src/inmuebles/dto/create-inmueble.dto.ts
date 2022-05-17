@@ -1,4 +1,6 @@
 import { IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { CreateUsuarioDto } from "src/usuarios/usuarios/dto/create-usuarios.dto";
+import { UsuariosEntity } from "src/usuarios/usuarios/entities/usuarios.entity";
 
 export class CreateInmuebleDto {
     
@@ -33,4 +35,8 @@ export class CreateInmuebleDto {
     @IsNotEmpty()
     @IsString()
     readonly descripcion: string;
+
+    @IsNotEmpty()
+    @IsString()
+    readonly nombreVendedor: CreateUsuarioDto;
 }
