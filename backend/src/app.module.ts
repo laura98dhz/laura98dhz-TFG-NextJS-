@@ -8,6 +8,12 @@ import { InmueblesModule } from './inmuebles/inmuebles.module';
 import { ImagenesController } from './imagenes/imagenes.controller';
 import { ImagenesService } from './imagenes/imagenes.service';
 import { ImagenesModule } from './imagenes/imagenes.module';
+import { MailerModule } from '@nestjs-modules/mailer';
+import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
+import { join } from 'path';
+import { MailsController } from './mails/mails.controller';
+import { MailsService } from './mails/mails.service';
+import { MailsModule } from './mails/mails.module';
 
 @Global()
 @Module({
@@ -26,16 +32,18 @@ import { ImagenesModule } from './imagenes/imagenes.module';
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_DATABASE'),
         entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        synchronize: true,
-        logging: true //para crear las tablas
+        synchronize: false,
+        logging: false //para crear las tablas
       }),
       inject: [ConfigService],
     }),
+  ConfigModule.forRoot(),
     UsuariosModule,
     InmueblesModule,
-    ImagenesModule
+    ImagenesModule,
+    MailsModule,
   ],
-  controllers: [AppController, ImagenesController],
-  providers: [AppService, ImagenesService],
+  controllers: [AppController, ImagenesController, MailsController],
+  providers: [AppService, ImagenesService, MailsService],
 })
-export class AppModule {}
+export class AppModule { }

@@ -70,10 +70,10 @@ function Registro (props){
                         </div>
                     </div> */}
 
-                    <div className="registro-redes">
+                    {/* <div className="registro-redes">
                         <i class="fa-brands fa-facebook registro-redes-facebook"></i>
                         <i class="fa-brands fa-google-plus registro-redes-google"></i>
-                    </div>
+                    </div> */}
                     
                     <button className="registro-boton" onClick={(e)=>crearUsuario(e)}>Registrarse</button>
 

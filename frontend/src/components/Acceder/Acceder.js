@@ -53,10 +53,10 @@ function Acceder (props){
                         <i class="fa-solid fa-key acceder-contraseña-icono"></i>
                         <input ref={contraseña} type='password' className="acceder-contraseña-caja" placeholder="Contraseña"></input>
                     </div>
-                    <div className="acceder-redes">
+                    {/* <div className="acceder-redes">
                         <i class="fa-brands fa-facebook acceder-redes-facebook"></i>
                         <i class="fa-brands fa-google-plus acceder-redes-google"></i>
-                    </div>
+                    </div> */}
                     <button className="acceder-boton" onClick={(e)=>comprobarUsuario(e, usuario, contraseña)}>Acceder</button>
                     <div className="acceder-recordar-contraseña">
                         <a className="acceder-recordar-contraseña-texto">¿Has Olvidado La Contraseña?</a>

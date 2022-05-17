@@ -6,7 +6,6 @@ import { CreateInmuebleDto } from './dto/create-inmueble.dto';
 import { UpdateInmuebleDto } from './dto/update-inmueble.dto';
 import { getRepository } from 'typeorm';
 
-import { UsuariosService } from 'src/usuarios/usuarios/usuarios.service';
 import { UsuariosEntity } from 'src/usuarios/usuarios/entities/usuarios.entity';
 import { UsuariosRepository } from 'src/usuarios/usuarios/usuarios.repository';
 
