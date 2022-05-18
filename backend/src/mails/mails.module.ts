@@ -14,7 +14,8 @@ import { MailsService } from './mails.service';
             envFilePath: '.env', //fichero con las variables globales
             transport: {
             host: config.get('EMAIL_HOST'),
-            secure: false,
+            secure: true,
+            port:465,
             auth: {
               user: config.get('EMAIL_USER'),
               pass: config.get('EMAIL_PASSWORD'),
