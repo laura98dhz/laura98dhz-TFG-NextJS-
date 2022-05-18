@@ -21,6 +21,12 @@ export class UsuariosController {
     return this.usuariosService.findByNombre(nombreUsuario);
   }
 
+  @Post('email')
+  @HttpCode(HttpStatus.OK)
+  findByEmail(@Body() correo: any) {
+    return this.usuariosService.findByEmail(correo.correo);
+  }
+
   @UsePipes(new ValidationPipe({whitelist:true}))
   @Post()
   @HttpCode(HttpStatus.CREATED)

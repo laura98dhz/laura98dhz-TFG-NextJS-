@@ -24,7 +24,15 @@ export class UsuariosService {
 
     async findByNombre(nombreUsuario: string): Promise<any> {
         const usuario = await this.usuarioRepository.createQueryBuilder("usuario").where("usuario.nombreUsuario = :nombreUsuario", { nombreUsuario: nombreUsuario }).getOne();
-        console.log(">>",usuario)
+        return usuario;
+    }
+
+    async findByEmail(correo: string): Promise<any> {
+        const usuario = await this.usuarioRepository.createQueryBuilder("usuario").where("usuario.correo = :correo", { correo: correo }).getOne();
+        
+        if (!usuario) {
+            throw new NotFoundException({ message: 'No hay usuario' })
+        }
         return usuario;
     }
 
