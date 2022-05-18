@@ -2,14 +2,45 @@ import logo from '../../Recursos/img/logo2.png';
 import Menu from '../Menu/Menu';
 import Piso from '../Piso/Piso'
 
-import {FindAllInmuebles, FindInmuebleByUbicacion} from '../../service/inmueblesService';
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 function Pisos(props){
-    
-    const pisos = FindInmuebleByUbicacion(props.ubicacion);        
-    console.log(pisos)
+   
+    const [pisos, setPisos] = useState([]);
+    const [cont, setCont] = useState(0);
+    const [ubicacion, setUbicacion] = useState();
+
+    if(props.ubicacion !== "" && cont=== 0){
+
+        fetch("http://localhost:8080/inmuebles"+'/'+ props.ubicacion, { 
+            'method': 'GET',
+            'headers': { 'Content-Type': 'application/json' },    
+        }).then(result => {
+            return result.json();
+        }).then( datos => {
+            setPisos(datos);
+            setCont(1);
+            setUbicacion(true);
+        })
+        .catch(err => console.log('Solicitud fallida', err)); 
+         
+
+    }else if(props.ubicacion === "" && cont=== 0){
+
+        fetch("http://localhost:8080/inmuebles", { 
+            'method': 'GET',
+            'headers': { 'Content-Type': 'application/json' },    
+        }).then(result => {
+            return result.json();
+        }).then( datos => {
+            setPisos(datos);
+            setCont(1)
+            setUbicacion(false);
+        })
+        .catch(err => console.log('Solicitud fallida', err)); 
+
+    }
  
     return(
         <>
@@ -17,13 +48,38 @@ function Pisos(props){
         <main>
             <section className='main-pisos'>
                    {
-                        pisos.map(function(piso){
-                           if(piso.tipoOperacion===props.opcion){
-                            return(
-                                <Piso piso={piso}/>                                                         
-                            )
-                           }
-                        })
+                       ubicacion ? (
+                            pisos.map(function(piso){
+                                console.log(piso)
+                                console.log(props.opcion==="")
+
+                                if(props.tipoOperacion !== ""  && piso.tipoOperacion === props.opcion){
+                                    console.log(1)
+                                    return(
+                                        <Piso piso={piso}/>                                                         
+                                    )
+                                }else if(props.opcion === "" ){
+                                    console.log(2)
+                                    return(
+                                        <Piso piso={piso}/>                                                         
+                                    )
+                                }
+                            })
+                       ) : (
+                            pisos.map(function(piso){
+                                if(props.tipoOperacion !== ""  && piso.tipoOperacion === props.opcion){
+                                    console.log(1)
+                                    return(
+                                        <Piso piso={piso}/>                                                         
+                                    )
+                                }else if(props.opcion === "" ){
+                                    console.log(2)
+                                    return(
+                                        <Piso piso={piso}/>                                                         
+                                    )
+                                }
+                            })
+                       )
                    }
             </section>
         </main>

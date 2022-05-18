@@ -19,20 +19,11 @@ export class InmueblesService {
 
     async findAll(): Promise<any> {
         const usuarios = await this.inmuebleRepository.createQueryBuilder("inmueble").getMany();
-
-        if (!usuarios.length) {
-            throw new NotFoundException({ message: 'No hay inmuebles' })
-        }
         return usuarios;
     }
 
     async findByUbicacion(ubicacion: string): Promise<any> {
         const inmueble = await this.inmuebleRepository.createQueryBuilder("inmueble").where("inmueble.ubicacion = :ubicacion", { ubicacion: ubicacion }).getMany();
-        
-        if (!inmueble.length) {
-            throw new NotFoundException({ message: 'No hay inmuebles' })
-        }
-
         return inmueble;
     }
 
