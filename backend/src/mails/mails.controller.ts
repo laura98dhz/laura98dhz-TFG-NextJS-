@@ -7,7 +7,7 @@ export class MailsController {
     constructor(private readonly mailsService: MailsService) {}
 
     @Post('welcome')
-    async sendEmailWelcome(@Query() email: any, @Query() name: any, @Query() password: any) {        
+    async sendEmailWelcome(@Query() email: any, @Query() name: any) {        
         return await this.mailsService.sendMailWelcome(email.email, name.name);
     }
 

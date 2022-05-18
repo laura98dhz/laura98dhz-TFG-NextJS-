@@ -17,9 +17,16 @@ function Registro (props){
                 'contraseña': contraseña.current.value,
                 'correo': correo.current.value
             })
-            })
-            .catch(err => console.log('Solicitud fallida', err));
-            props.cerrarRegistro();
+        })
+        .catch(err => console.log('Solicitud fallida', err));
+        
+        fetch("http://localhost:8080/mails/welcome?email="+ correo.current.value + "&name=" + usuario.current.value, { 
+            'method': 'POST',
+            'headers': { 'Content-Type': 'application/json' } 
+        })
+        .catch(err => console.log('Solicitud fallida', err)); 
+
+        props.cerrarRegistro();
     }
 
 
