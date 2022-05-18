@@ -13,7 +13,12 @@ export class MailsService {
             template: '/emailBienvenida',
             context: {
                 name: name,
-            }
+            },
+            attachments: [{
+                filename: 'logo.png',
+                path: __dirname + '/templates/logo.png',
+                cid: 'logo'
+            }]
         })
     }
 
@@ -25,7 +30,12 @@ export class MailsService {
             context: {
                 name: name,
                 password: password
-            }
+            },
+            attachments: [{
+                filename: 'logo.png',
+                path: __dirname + '/templates/logo.png',
+                cid: 'logo'
+            }]
         })
     }
 }
