@@ -16,6 +16,10 @@ function Header(props){
     function miUsuario(){
         props.ajustesOnClick()
     }
+
+    function ponerAnuncio(){
+        console.log(1234)
+    }
     
     return(
         <header className='header'>
@@ -24,7 +28,7 @@ function Header(props){
                 <div className='anuncio'>
                     <button className='anuncio-boton'>
                         <i class="fa-solid fa-thumbtack anuncio-boton-icono"></i>
-                        <p>Pon tu anuncio gratis</p>
+                        <p onClick={()=>ponerAnuncio()}>Pon tu anuncio gratis</p>
                     </button>       
                 </div>
                 {props.usuario === null ? (
