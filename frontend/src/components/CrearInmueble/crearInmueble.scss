@@ -1,0 +1,111 @@
+.crear-inmueble{
+    
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+
+    &-container{
+        background-color: rgb(241, 241, 241);
+        border-radius: 1rem;
+        width: 75%;
+        padding: 3rem;
+        padding-bottom: 1rem;
+        //position: relative;
+        top:50%;
+        transform: translateY(-50%);
+        display: flex;
+        justify-content: center;
+    }
+
+    &-form{
+        display: flex;
+        flex-direction: column;
+    }
+
+    &-titulo{
+        display: flex;
+        justify-content: center;
+        margin-bottom: 4rem;
+    }
+
+    &-precio, &-ubicacion, &-superficie, &-habitaciones, &-baños, &-descripcion{
+        margin: 0 auto;
+        margin-bottom: 2rem;
+        border-radius: 5px;
+        height: 6rem;
+        width: 100%;
+    
+        &-texto{
+            color: rgb(70,70,70);  
+            margin-bottom: .5rem; 
+        }
+
+        &-container{
+            display: flex;
+            border-bottom: 1px solid rgb(70, 70, 70);
+            border-radius: 2px;
+        }
+
+        &-caja{
+            border: none;
+            outline: none;
+            font-size: 2rem;
+            color: rgb(70,70,70);
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            border-radius: 2px;
+            border-bottom: 1px solid rgb(70, 70, 70);
+            width: 100%;
+            background-color: transparent;
+            &:nth-child(1){
+                border: none;
+            }
+        }
+
+        
+    }
+    &-tipo-inmueble, &-tipo-transaccion{
+        
+        &-texto{
+            color: rgb(70,70,70);  
+            margin-bottom: 2rem; 
+        }
+
+        &-container{
+            display: flex;
+            margin-bottom: 2rem;
+        }
+    }
+
+    
+    &-boton{
+        width: 35%;
+        margin: 0 auto;
+        margin-bottom: 2rem;
+        height: 4rem;        
+        color: rgb(70, 70, 70);
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        background-color: white;
+        border: .5px rgb(241, 241, 241) solid;
+        border-radius: 2px;
+        cursor: pointer;
+        transition: all ease .5s;
+    
+        &:hover{
+            background-color: rgb(176, 158, 128);
+            color: white;
+        }
+    }
+
+
+    &-container-atras{
+        background-color: rgba(0, 0, 0, 0.7);
+        width: 100%;
+        height: 100vh;
+        position: absolute;
+    }
+
+
+
+    
+}

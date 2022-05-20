@@ -18,7 +18,7 @@ function Header(props){
     }
 
     function ponerAnuncio(){
-        console.log(1234)
+        props.handleCargarAnuncio();
     }
     
     return(

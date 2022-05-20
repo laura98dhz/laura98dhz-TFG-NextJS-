@@ -8,6 +8,7 @@ import Acceder from './components/Acceder/Acceder';
 import { useState } from 'react';
 import AjustesUsuario from './components/AjustesUsuario/AjustesUsuario';
 import Registro from './components/Registro/Registro';
+import CrearInmueble from './components/CrearInmueble/CrearInmueble';
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
   const [cargarMain, setCargarMain] = useState(true);
   const [cargarAjustesUsuario, setCargarAjustesUsuario] = useState(false);
   const [cargarRegistro, setCargarRegistro] = useState(false);
+  const [cargarCrearInmueble, setCargarCrearInmueble] = useState(false);
 
   const [opcionElegida, setOpcionElegida] = useState("");
   const [ubicacion, setUbicacion] = useState("");
@@ -75,6 +77,11 @@ function App() {
     setCargarPisos(false);
     setCargarFooter(false);
   }
+
+  function cargarPonerAnuncio(){
+    setCargarCrearInmueble(true);
+    console.log(1234)
+  }
   
   //Guardar datos
 
@@ -97,13 +104,14 @@ function App() {
   
   return (
     <>
-      { cargarHeader ?  <Header handleOnClick={mostrarMain} accederOnClick={mostrarAcceder} usuario={sessionStorage.getItem('usuario')} ajustesOnClick={ajustesUsuario}/> : ""}
+      { cargarHeader ?  <Header handleOnClick={mostrarMain} accederOnClick={mostrarAcceder} usuario={sessionStorage.getItem('usuario')} ajustesOnClick={ajustesUsuario} handleCargarAnuncio={cargarPonerAnuncio}/> : ""}
       { cargarAcceder ? <Acceder cerrarOnCLick={cerrarAcceder} usuarioOnClick={usuarioCorrecto} crearUsuarioOnClick={cargarRegistroUsuario}/> : "" }
       { cargarMain ? <MainPrincipal handleOnClick={mostrarInmuebles} opcionOnClick={selectOpcionTransaccion} ubicacionOnClick={ubicacionElegida}/> : "" }
       { cargarPisos ? <Pisos ubicacion={ubicacion} opcion={opcionElegida}/> : "" }
       { cargarAjustesUsuario ? <AjustesUsuario cerrarAjustes={cerrarAjustesUsuario}/> : "" }
       { cargarFooter ? <Footer/> : "" }
       { cargarRegistro ? <Registro cargarRegistro={cargarRegistroUsuario} cerrarRegistro={mostrarMain}/> : "" }
+      { sessionStorage.getItem('usuario') && cargarCrearInmueble ? <CrearInmueble/> : ""}
     </>
   );
 }
