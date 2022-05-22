@@ -95,6 +95,8 @@ function App() {
     setCargarMain(false);
     setCargarPisos(false);
     setCargarFooter(false);
+    setCargarEditarInmueble(false);
+    setCargarAjustesUsuario(false);
   }
   
   //Guardar datos
