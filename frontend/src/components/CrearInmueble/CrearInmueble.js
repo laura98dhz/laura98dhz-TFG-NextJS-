@@ -4,23 +4,23 @@ export default function CrearInmueble(props){
     
     function crearInmueble(e){
         e.nativeEvent.preventDefault(); 
-
-        fetch("http://localhost:8080/inmuebles/" + sessionStorage.getItem("usuario"), { 
-            'method': 'POST',
-            'headers': { 'Content-Type': 'application/json' },    
-            'body': JSON.stringify({
-                'ubicacion': e.target.ubicacion.value,
-                'tipoInmueble': e.target.tipoInmueble.value,
-                'tipoOperacion': e.target.tipoOperacion.value,
-                'superficie': parseInt(e.target.superficie.value, 10),
-                'habitaciones': parseInt(e.target.habitaciones.value, 10),
-                'baños': parseInt(e.target.baños.value, 10),
-                'precio': parseInt(e.target.precio.value, 10),
-                'descripcion': e.target.descripcion.value,
-                'nombreVendedor': sessionStorage.getItem('usuario')  
-            })
-        })
-        props.cerrarOnCLick()
+        console.log(e)
+        // fetch("http://localhost:8080/inmuebles/" + sessionStorage.getItem("usuario"), { 
+        //     'method': 'POST',
+        //     'headers': { 'Content-Type': 'application/json' },    
+        //     'body': JSON.stringify({
+        //         'ubicacion': e.target.ubicacion.value,
+        //         'tipoInmueble': e.target.tipoInmueble.value,
+        //         'tipoOperacion': e.target.tipoOperacion.value,
+        //         'superficie': parseInt(e.target.superficie.value, 10),
+        //         'habitaciones': parseInt(e.target.habitaciones.value, 10),
+        //         'baños': parseInt(e.target.baños.value, 10),
+        //         'precio': parseInt(e.target.precio.value, 10),
+        //         'descripcion': e.target.descripcion.value,
+        //         'nombreVendedor': sessionStorage.getItem('usuario')  
+        //     })
+        // })
+        // props.cerrarOnCLick()
     }
 
     return(
