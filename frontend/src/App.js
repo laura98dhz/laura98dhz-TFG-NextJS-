@@ -56,6 +56,7 @@ function App() {
     setCargarHeader(true);
     setCargarMain(true);
     setCargarFooter(true);
+    setCargarCrearInmueble(false)
   }
 
   function ajustesUsuario(){
@@ -80,6 +81,10 @@ function App() {
 
   function cargarPonerAnuncio(){
     setCargarCrearInmueble(true);
+    setCargarHeader(false);
+    setCargarMain(false);
+    setCargarPisos(false);
+    setCargarFooter(false);
     console.log(1234)
   }
   
@@ -111,7 +116,7 @@ function App() {
       { cargarAjustesUsuario ? <AjustesUsuario cerrarAjustes={cerrarAjustesUsuario}/> : "" }
       { cargarFooter ? <Footer/> : "" }
       { cargarRegistro ? <Registro cargarRegistro={cargarRegistroUsuario} cerrarRegistro={mostrarMain}/> : "" }
-      { sessionStorage.getItem('usuario') && cargarCrearInmueble ? <CrearInmueble/> : ""}
+      { sessionStorage.getItem('usuario') && cargarCrearInmueble ? <CrearInmueble cerrarOnCLick={cerrarAcceder}/> : "" }
     </>
   );
 }
