@@ -1,5 +1,4 @@
 export default function Piso(props){
-    console.log(props)
     return(
 
         <div key={props.piso.id} className="piso--container">
@@ -15,6 +14,9 @@ export default function Piso(props){
                     <p>{props.piso.habitaciones} habs.</p>
                     <p>{props.piso.baños} baños</p>
                     <p>{props.piso.superficie} &#13217;</p>
+                </div>
+                <div className="piso--detalles--descripcion">
+                    <p>{props.piso.descripcion}</p>
                 </div>
             </div>
         </div>

@@ -1,9 +1,29 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import Piso from "../Piso/Piso";
 
 export default function AjustesUsuario(props){
     const usuario = useRef(null);
     const correo = useRef(null);
     const contraseña = useRef(null);
+    
+    const [inmuebles, setInmuebles] = useState([]);
+    const [borrado, setBorrado] = useState(false);
+    
+
+    useEffect(()=>{
+        fetch("http://localhost:8080/inmuebles/mostrar/"+ sessionStorage.getItem('usuario'), { 
+            'method': 'GET',
+            'headers': { 'Content-Type': 'application/json' },    
+        })
+        .then(result => {
+            return result.json()
+        })
+        .then( datos => {
+            setInmuebles(datos)
+        })
+        .catch(err => console.log('Solicitud fallida', err));
+    
+    },[borrado])
 
     function cerrarSesion(e){
         e.nativeEvent.preventDefault();
@@ -111,7 +131,25 @@ export default function AjustesUsuario(props){
         }
     }
 
+    function borrar(id){
+        fetch("http://localhost:8080/inmuebles/" + id, { 
+            'method': 'DELETE',
+            'headers': { 'Content-Type': 'application/json' },    
+            'body': JSON.stringify({
+                'id': id
+            })
+        })
+        .catch(err => console.log('Solicitud fallida', err)); 
+
+        borrado ? setBorrado(false) : setBorrado(true);
+    }
+
+    function editar(id){
+        props.handleEditar(id);
+    }
+
     return(
+
         <section className="ajustesUsuario--container">
             <div className="ajustesUsuario--usuario">
                 <div className="ajustesUsuario--usuario--imagen--container">
@@ -130,7 +168,23 @@ export default function AjustesUsuario(props){
             </div>
             <div className="ajustesUsuario--inmuebles">
                 <p>Mis inmuebles</p>
-                <p className="ajustesUsuario--inmuebles--">Inmuebles + Editar + Borrar</p>
+                <div className="ajustesUsuario--inmuebles--container">
+                    {
+                        inmuebles.map(function(piso){
+                            return(
+                                <div className="ajustesUsuario--inmuebles--piso--container">
+                                    <Piso piso={piso}/>
+                                    <div className="ajustesUsuario--inmuebles--piso--botones">
+                                        <a className="ajustesUsuario--inmuebles--piso--botones--editar" onClick={()=>editar(piso.id)}><i class="fa-solid fa-square-pen"></i></a>
+                                        <a className="ajustesUsuario--inmuebles--piso--botones--borrar" onClick={()=>borrar(piso.id)}><i class="fa-solid fa-square-minus"></i></a>
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
+                </div>
+
+                <p className="ajustesUsuario--inmuebles--"></p>
             </div>
             <div className="ajustesUsuario--cerrarSesion">
                 <button onClick={(e)=>cerrarSesion(e)}>Cerrar Sesión</button>

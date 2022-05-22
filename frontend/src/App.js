@@ -9,6 +9,7 @@ import { useState } from 'react';
 import AjustesUsuario from './components/AjustesUsuario/AjustesUsuario';
 import Registro from './components/Registro/Registro';
 import CrearInmueble from './components/CrearInmueble/CrearInmueble';
+import EditarInmueble from './components/EditarInmueble/EditarInmueble';
 
 function App() {
 
@@ -20,9 +21,11 @@ function App() {
   const [cargarAjustesUsuario, setCargarAjustesUsuario] = useState(false);
   const [cargarRegistro, setCargarRegistro] = useState(false);
   const [cargarCrearInmueble, setCargarCrearInmueble] = useState(false);
+  const [cargarEditarInmueble, setCargarEditarInmueble] = useState(false)
 
   const [opcionElegida, setOpcionElegida] = useState("");
   const [ubicacion, setUbicacion] = useState("");
+  const [id, setId] = useState("");
   
   //Ocultar y mostrar
 
@@ -56,7 +59,14 @@ function App() {
     setCargarHeader(true);
     setCargarMain(true);
     setCargarFooter(true);
-    setCargarCrearInmueble(false)
+    setCargarCrearInmueble(false);
+  }
+  
+  function cerrarEditarInmueble(){
+    setCargarEditarInmueble(false);
+    setCargarHeader(true);
+    setCargarAjustesUsuario(true);
+    setCargarFooter(true);
   }
 
   function ajustesUsuario(){
@@ -85,7 +95,6 @@ function App() {
     setCargarMain(false);
     setCargarPisos(false);
     setCargarFooter(false);
-    console.log(1234)
   }
   
   //Guardar datos
@@ -95,7 +104,7 @@ function App() {
   }
 
   function ubicacionElegida(ubicacion){
-    setUbicacion(ubicacion)
+    setUbicacion(ubicacion);
   }
 
   function usuarioCorrecto(usuario){
@@ -106,17 +115,26 @@ function App() {
     sessionStorage.setItem('usuario', usuario.nombreUsuario)
     sessionStorage.setItem('correo', usuario.correo)
   }
-  
+
+  function editarInmueble(id){
+    setCargarEditarInmueble(true);
+    setCargarHeader(false);
+    setCargarAjustesUsuario(false);
+    setCargarFooter(false);
+    setId(id);
+  }
+
   return (
     <>
-      { cargarHeader ?  <Header handleOnClick={mostrarMain} accederOnClick={mostrarAcceder} usuario={sessionStorage.getItem('usuario')} ajustesOnClick={ajustesUsuario} handleCargarAnuncio={cargarPonerAnuncio}/> : ""}
+      { cargarHeader ?  <Header handleOnClick={mostrarMain} accederOnClick={mostrarAcceder} usuario={sessionStorage.getItem('usuario')} ajustesOnClick={ajustesUsuario} handleCargarAnuncio={cargarPonerAnuncio}/> : "" }
       { cargarAcceder ? <Acceder cerrarOnCLick={cerrarAcceder} usuarioOnClick={usuarioCorrecto} crearUsuarioOnClick={cargarRegistroUsuario}/> : "" }
       { cargarMain ? <MainPrincipal handleOnClick={mostrarInmuebles} opcionOnClick={selectOpcionTransaccion} ubicacionOnClick={ubicacionElegida}/> : "" }
       { cargarPisos ? <Pisos ubicacion={ubicacion} opcion={opcionElegida}/> : "" }
-      { cargarAjustesUsuario ? <AjustesUsuario cerrarAjustes={cerrarAjustesUsuario}/> : "" }
+      { cargarAjustesUsuario ? <AjustesUsuario cerrarAjustes={cerrarAjustesUsuario} handleEditar={editarInmueble}/> : "" }
       { cargarFooter ? <Footer/> : "" }
       { cargarRegistro ? <Registro cargarRegistro={cargarRegistroUsuario} cerrarRegistro={mostrarMain}/> : "" }
       { sessionStorage.getItem('usuario') && cargarCrearInmueble ? <CrearInmueble cerrarOnCLick={cerrarAcceder}/> : "" }
+      { cargarEditarInmueble ? <EditarInmueble id={id} cerrarOnCLick={cerrarEditarInmueble}/> : "" }
     </>
   );
 }

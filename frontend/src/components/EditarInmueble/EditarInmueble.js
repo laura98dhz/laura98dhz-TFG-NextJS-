@@ -1,26 +1,44 @@
-import { useRef } from "react";
+import { useEffect, useState } from "react";
 
 export default function CrearInmueble(props){
+    const [inmueble, setInmueble] = useState([])
     
-    function crearInmueble(e){
-        e.nativeEvent.preventDefault(); 
+    useEffect(()=>{
 
-        fetch("http://localhost:8080/inmuebles/" + sessionStorage.getItem("usuario"), { 
-            'method': 'POST',
-            'headers': { 'Content-Type': 'application/json' },    
-            'body': JSON.stringify({
-                'ubicacion': e.target.ubicacion.value,
-                'tipoInmueble': e.target.tipoInmueble.value,
-                'tipoOperacion': e.target.tipoOperacion.value,
-                'superficie': parseInt(e.target.superficie.value, 10),
-                'habitaciones': parseInt(e.target.habitaciones.value, 10),
-                'baños': parseInt(e.target.baños.value, 10),
-                'precio': parseInt(e.target.precio.value, 10),
-                'descripcion': e.target.descripcion.value,
-                'nombreVendedor': sessionStorage.getItem('usuario')  
-            })
-        })
-        props.cerrarOnCLick()
+        setInmueble(fetch("http://localhost:8080/inmuebles/id/" + props.id, { 
+                                                'method': 'GET',
+                                                'headers': { 'Content-Type': 'application/json' }  
+                                            })
+                                            .then(result => {
+                                                return result.json()
+                                            })
+                                            .then( dato => {
+                                                setInmueble(dato)
+                                            })
+                                            .catch(err => console.log('Solicitud fallida', err))
+                                        )
+        
+    },[])
+
+    function editarInmueble(e){
+        e.nativeEvent.preventDefault();
+        console.log(e.target);
+        // fetch("http://localhost:8080/usuarios"+'/'+ sessionStorage.getItem('usuario'), { 
+        //     'method': 'PUT',
+        //     'headers': { 'Content-Type': 'application/json' },    
+        //     'body': JSON.stringify({
+        //             'ubicacion': e.target.ubicacion.value,
+        //             'tipoInmueble': e.target.tipoInmueble.value,
+        //             'tipoOperacion': e.target.tipoOperacion.value,
+        //             'superficie': parseInt(e.target.superficie.value, 10),
+        //             'habitaciones': parseInt(e.target.habitaciones.value, 10),
+        //             'baños': parseInt(e.target.baños.value, 10),
+        //             'precio': parseInt(e.target.precio.value, 10),
+        //             'descripcion': e.target.descripcion.value
+        //         })
+        //     })
+        //     .catch(err => console.log('Solicitud fallida', err));
+        
     }
 
     return(
@@ -30,10 +48,10 @@ export default function CrearInmueble(props){
         <section className="crear-inmueble">
             
             <div className="crear-inmueble-container">
-                <form className="crear-inmueble-form" onSubmit={(e)=>crearInmueble(e)}>
+                <form className="crear-inmueble-form" onSubmit={(e)=>editarInmueble(e)}>
                     
                     <div className="crear-inmueble-titulo">
-                        <h2>Subir Inmueble</h2>
+                        <h2>Editar Inmueble</h2>
                     </div>
 
                     <div className="crear-inmueble-tipo-inmueble">
@@ -59,46 +77,46 @@ export default function CrearInmueble(props){
                     <div className="crear-inmueble-precio">
                         <p className="crear-inmueble-precio-texto">Precio</p>
                         <div className="crear-inmueble-precio-container">
-                            <input type='number' name="precio" className="crear-inmueble-precio-caja"></input>
+                            <input placeholder={inmueble.precio} type='number' name="precio" className="crear-inmueble-precio-caja"></input>
                         </div>
                     </div>
 
                     <div className="crear-inmueble-ubicacion">
                         <p className="crear-inmueble-ubicacion-texto">Ubicacion</p>
                         <div className="crear-inmueble-ubicacion-container">
-                            <input type='text' name="ubicacion" className="crear-inmueble-ubicacion-caja"></input>
+                            <input placeholder={inmueble.ubicacion} type='text' name="ubicacion" className="crear-inmueble-ubicacion-caja"></input>
                         </div>
                     </div>
 
                     <div className="crear-inmueble-superficie">
                         <p className="crear-inmueble-superficie-texto">Superficie</p>
                         <div className="crear-inmueble-superficie-container">
-                            <input type='number' name="superficie" className="crear-inmueble-superficie-caja"></input>
+                            <input placeholder={inmueble.superficie} type='number' name="superficie" className="crear-inmueble-superficie-caja"></input>
                         </div>
                     </div>
 
                     <div className="crear-inmueble-habitaciones">
                         <p className="crear-inmueble-habitaciones-texto">Número de Habitaciones</p>
                         <div className="crear-inmueble-habitaciones-container">
-                            <input type='number' name="habitaciones" className="crear-inmueble-habitaciones-caja"></input>
+                            <input placeholder={inmueble.habitaciones} type='number' name="habitaciones" className="crear-inmueble-habitaciones-caja"></input>
                         </div>
                     </div>
 
                     <div className="crear-inmueble-baños">
                         <p className="crear-inmueble-baños-texto">Número de Baños</p>
                         <div className="crear-inmueble-baños-container">
-                            <input type='number' name="baños" className="crear-inmueble-baños-caja"></input>
+                            <input placeholder={inmueble.baños} type='number' name="baños" className="crear-inmueble-baños-caja"></input>
                         </div>
                     </div>
 
                     <div className="crear-inmueble-descripcion">
                         <p className="crear-inmueble-descripcion-texto">Descripción del Inmueble</p>
                         <div className="crear-inmueble-descripcion-container">
-                            <textarea name="descripcion" className="crear-inmueble-descripcion-caja"></textarea>
+                            <textarea placeholder={inmueble.descripcion} name="descripcion" className="crear-inmueble-descripcion-caja"></textarea>
                         </div>
                     </div>
                     
-                    <input type="submit" className="crear-inmueble-boton" value="Subir"/>
+                    <input type="submit" className="crear-inmueble-boton" value="Guardar" onClick={(e)=>editarInmueble(e)}/>
 
                 </form>
                 <i class="fa-solid fa-xmark crear-inmueble--cruz" onClick={()=>{props.cerrarOnCLick()}}></i>

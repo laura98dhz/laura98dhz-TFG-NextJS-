@@ -20,6 +20,20 @@ export class InmueblesController {
     return this.inmueblesService.findByUbicacion(ubicacion);
   }
 
+  @Get('/mostrar/:usuario')
+  @HttpCode(HttpStatus.OK)
+  findByUsuario(@Param('usuario') usuario: string) {
+    return this.inmueblesService.findByUsuario(usuario);
+  }
+
+  @Get('/id/:id')
+  @HttpCode(HttpStatus.OK)
+  findById(@Param('id') id: number) {
+    return this.inmueblesService.findById(id);
+  }
+
+  
+
   @UsePipes(new ValidationPipe({whitelist:true}))
   @Post('/:vendedor')
   @HttpCode(HttpStatus.CREATED)
@@ -34,7 +48,7 @@ export class InmueblesController {
     return this.inmueblesService.update(id,data);
   }
 
-  @Delete(':id')
+  @Delete('/:id')
   @HttpCode(HttpStatus.OK)
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.inmueblesService.delete(id);

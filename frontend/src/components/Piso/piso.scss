@@ -20,6 +20,7 @@
         justify-content: center;
         padding: 2rem;
         padding-left: 6rem;
+        width: 100%;
 
         &--precio{
             padding-bottom: 2rem;
@@ -36,6 +37,9 @@
             &>p{
                 margin-right: 2rem;    
             }
+        }
+        &--descripcion{
+            margin-top: 2rem;
         }
     }
 }

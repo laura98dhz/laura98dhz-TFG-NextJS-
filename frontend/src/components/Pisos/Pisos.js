@@ -50,16 +50,12 @@ function Pisos(props){
                    {
                        ubicacion ? (
                             pisos.map(function(piso){
-                                console.log(piso)
-                                console.log(props.opcion==="")
-
+                                
                                 if(props.tipoOperacion !== ""  && piso.tipoOperacion === props.opcion){
-                                    console.log(1)
                                     return(
                                         <Piso piso={piso}/>                                                         
                                     )
                                 }else if(props.opcion === "" ){
-                                    console.log(2)
                                     return(
                                         <Piso piso={piso}/>                                                         
                                     )
@@ -68,12 +64,10 @@ function Pisos(props){
                        ) : (
                             pisos.map(function(piso){
                                 if(props.tipoOperacion !== ""  && piso.tipoOperacion === props.opcion){
-                                    console.log(1)
                                     return(
                                         <Piso piso={piso}/>                                                         
                                     )
                                 }else if(props.opcion === "" ){
-                                    console.log(2)
                                     return(
                                         <Piso piso={piso}/>                                                         
                                     )

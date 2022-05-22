@@ -22,14 +22,47 @@ export class InmueblesService {
         return usuarios;
     }
 
+    async findById(id: number): Promise<any> {
+        const inmueble = await this.inmuebleRepository.findOne({
+            where: {
+                id: id
+            }
+        });
+        return inmueble;
+    }
+
+    async findByUsuario(nombreUsuario: string): Promise<any> {
+        
+        const usuario = await getRepository('UsuariosEntity').createQueryBuilder("usuario").where("usuario.nombreUsuario = :nombreUsuario", { nombreUsuario: nombreUsuario }).getOne();
+        
+        if(!usuario) throw new BadRequestException({message: 'Ese usuario no existe'}) 
+
+        const inmueble = this.inmuebleRepository.find({
+            where: {
+                vendedor: nombreUsuario
+            }
+        });
+
+        return inmueble;
+    }
+
     async findByUbicacion(ubicacion: string): Promise<any> {
-        const inmueble = await this.inmuebleRepository.createQueryBuilder("inmueble").where("inmueble.ubicacion = :ubicacion", { ubicacion: ubicacion }).getMany();
+        const inmueble = this.inmuebleRepository.find({
+            where: {
+                ubicacion: ubicacion
+            }
+        });        
         return inmueble;
     }
 
     async create(nombreUsuario: string, data: CreateInmuebleDto): Promise<any> {
         
-        const usuario = getRepository('UsuariosEntity').createQueryBuilder("usuario");
+        const usuario = getRepository('UsuariosEntity').findOne({
+            where: {
+                nombreUsuario: nombreUsuario
+            }
+        });
+        
         if(!usuario) throw new BadRequestException({message: 'Ese usuario no existe'}) 
 
         const newInmueble = this.inmuebleRepository.create(data);
