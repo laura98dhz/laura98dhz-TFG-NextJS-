@@ -7,24 +7,43 @@ function Acceder (props){
     const [recuperarContraseña, setRecuperarContraseña] = useState(false);
     const [usuarioValido, setUsuarioValido] = useState("");
     const [correoValido, setCorreoValido] = useState(false);
+    const [mensajeError, setMensajeError] = useState("");
 
     const usuario = useRef("");
     const contraseña = useRef("");
     const correo = useRef("");
+    const usuarioContainer = useRef("");
+    const contraseñaContainer = useRef("");
 
     function comprobarUsuario(e, usuario, contraseña){
         e.nativeEvent.preventDefault();
+        
+        if(usuario.current.value === ""){
+            usuarioContainer.current.style.border = "1px solid red";
+        }else{
+            usuarioContainer.current.style.border = "";
+        }
 
-        fetch("http://localhost:8080/usuarios"+'/'+ usuario.current.value, { 
+        if(contraseña.current.value === ""){
+            contraseñaContainer.current.style.border = "1px solid red";
+        }else{
+            contraseñaContainer.current.style.border = "";
+        }
+
+        fetch("http://localhost:8080/usuarios/"+ usuario.current.value, { 
             'method': 'GET',
             'headers': { 'Content-Type': 'application/json' },    
-        }).then(result => {
+        }).then( result => {
             return result.json();
         }).then( usuario => {
             setBuscarUsuario(usuario);
+        }).then( () => {
+            setMensajeError("")
         })
-        .catch(err => console.log('Solicitud fallida', err)); 
+        .catch(setMensajeError("Ese Usuario No Existe")); 
         setBuscarContraseña(contraseña.current.value)
+
+        
     }
 
     if(buscarUsuario !== null && buscarContraseña !== null){
@@ -96,11 +115,11 @@ function Acceder (props){
                             <div className="acceder-titulo">
                                 <h2>Acceder</h2>
                             </div>
-                            <div className="acceder-usuario">
+                            <div className="acceder-usuario" ref={usuarioContainer}>
                                 <i class="fa-solid fa-circle-user acceder-usuario-icono"></i>
                                 <input ref={usuario} type='text' className="acceder-usuario-caja" placeholder="Usuario"></input>
                             </div>
-                            <div className="acceder-contraseña">
+                            <div className="acceder-contraseña" ref={contraseñaContainer}>
                                 <i class="fa-solid fa-key acceder-contraseña-icono"></i>
                                 <input ref={contraseña} type='password' className="acceder-contraseña-caja" placeholder="Contraseña"></input>
                             </div>
@@ -108,6 +127,9 @@ function Acceder (props){
                                 <i class="fa-brands fa-facebook acceder-redes-facebook"></i>
                                 <i class="fa-brands fa-google-plus acceder-redes-google"></i>
                             </div> */}
+                            <div className="acceder-mensaje-error">
+                                <p className="acceder-mensaje-error-texto">{mensajeError}</p>
+                            </div>
                             <button className="acceder-boton" onClick={(e)=>comprobarUsuario(e, usuario, contraseña)}>Acceder</button>
                             <div className="acceder-recordar-contraseña">
                                 <a className="acceder-recordar-contraseña-texto" onClick={()=>contraseñaOlvidada()}>¿Has Olvidado La Contraseña?</a>

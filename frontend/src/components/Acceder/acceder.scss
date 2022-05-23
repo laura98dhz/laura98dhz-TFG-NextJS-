@@ -39,6 +39,16 @@
         justify-content: center;
         margin-bottom: 4rem;
     }
+    &-mensaje-error{
+        display: flex;
+        justify-content: center;
+        margin-bottom: 2rem;
+        color: red;
+        
+        &-texto{
+            font-size: small;
+        }
+    }
 
     &-usuario,
     &-contraseña {
