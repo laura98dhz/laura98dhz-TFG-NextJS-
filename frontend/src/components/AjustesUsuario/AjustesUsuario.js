@@ -8,8 +8,8 @@ export default function AjustesUsuario(props){
     
     const [inmuebles, setInmuebles] = useState([]);
     const [borrado, setBorrado] = useState(false);
-    
-
+    const [mensajeError, setMensajeError] = useState("");
+    console.log(mensajeError)
     useEffect(()=>{
         fetch("http://localhost:8080/inmuebles/mostrar/"+ sessionStorage.getItem('usuario'), { 
             'method': 'GET',
@@ -47,8 +47,10 @@ export default function AjustesUsuario(props){
                 'correo': correo.current.value
             })
             })
-            .catch(err => console.log('Solicitud fallida', err));
-            cerrarSesion(e);
+            .then(() => {
+                setMensajeError("")
+            })
+            .catch(setMensajeError("Ese usuario ya existe"));
         }
 
         if(usuario.current.value && contraseña.current.value ){
@@ -60,9 +62,11 @@ export default function AjustesUsuario(props){
                     'contraseña': contraseña.current.value
                 })
                 })
-                .catch(err => console.log('Solicitud fallida', err));
-                cerrarSesion(e);
-        }
+                .then(() => {
+                    setMensajeError("")
+                })
+                .catch(setMensajeError("Ese usuario ya existe"));
+            }
         if(usuario.current.value && correo.current.value){
            
             fetch("http://localhost:8080/usuarios"+'/'+ sessionStorage.getItem('usuario'), { 
@@ -73,8 +77,10 @@ export default function AjustesUsuario(props){
                 'correo': correo.current.value
             })
             })
-            .catch(err => console.log('Solicitud fallida', err));
-            cerrarSesion(e);
+            .then(() => {
+                setMensajeError("")
+            })
+            .catch(setMensajeError("Ese usuario ya existe"));
         }
 
         if(contraseña.current.value && correo.current.value){
@@ -87,8 +93,10 @@ export default function AjustesUsuario(props){
                 'correo': correo.current.value
             })
             })
+            .then(() => {
+                setMensajeError("")
+            })
             .catch(err => console.log('Solicitud fallida', err));
-            cerrarSesion(e);
         }
 
         if(usuario.current.value){
@@ -100,8 +108,10 @@ export default function AjustesUsuario(props){
                 'nombreUsuario': usuario.current.value,
             })
             })
-            .catch(err => console.log('Solicitud fallida', err));
-            cerrarSesion(e);
+            .then(() => {
+                setMensajeError("")
+            })
+            .catch(setMensajeError("Ese usuario ya existe"));
         }
 
         if(contraseña.current.value){
@@ -113,8 +123,10 @@ export default function AjustesUsuario(props){
                 'contraseña': contraseña.current.value,
             })
             })
+            .then(() =>{ 
+                setMensajeError("")
+            })
             .catch(err => console.log('Solicitud fallida', err));
-            cerrarSesion(e);
         }
 
         if(correo.current.value){
@@ -126,8 +138,10 @@ export default function AjustesUsuario(props){
                 'correo': correo.current.value
             })
             })
+            .then(() => {
+                setMensajeError("")
+            })
             .catch(err => console.log('Solicitud fallida', err));
-            cerrarSesion(e);
         }
     }
 
@@ -163,6 +177,7 @@ export default function AjustesUsuario(props){
                     <input ref={correo} type="mail" name="nombreMail" placeholder={sessionStorage.getItem('correo')}></input>
                     <p className="ajustesUsuario--usuario--datos--contraseña">Contraseña</p>
                     <input ref={contraseña} type="password" name="nombreContraseña"></input>
+                    <p className="ajustesUsuario--usuario--datos--mensaje--error">{ mensajeError }</p>
                     <button onClick={(e)=>actualizarDatos(e)}>Guardar</button>
                 </form>
             </div>
@@ -172,7 +187,7 @@ export default function AjustesUsuario(props){
                     {
                         inmuebles.map(function(piso){
                             return(
-                                <div className="ajustesUsuario--inmuebles--piso--container">
+                                <div key={piso.id} className="ajustesUsuario--inmuebles--piso--container">
                                     <Piso piso={piso}/>
                                     <div className="ajustesUsuario--inmuebles--piso--botones">
                                         <a className="ajustesUsuario--inmuebles--piso--botones--editar" onClick={()=>editar(piso.id)}><i class="fa-solid fa-square-pen"></i></a>

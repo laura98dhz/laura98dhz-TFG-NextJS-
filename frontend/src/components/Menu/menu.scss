@@ -1,0 +1,17 @@
+.menu--inmuebles{
+    &--container{
+        display: flex;
+    }
+    &--items{
+        display: flex;
+        &--flecha{
+            content: "";
+            width: 1rem;
+            height: 1rem;
+            border:  10px solid rgb(57, 102, 102);
+            border-width: 2px 0 0 2px;
+            transform: rotate(-135deg);
+        
+        }
+    }
+}
