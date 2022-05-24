@@ -44,8 +44,8 @@ function Pisos(props){
  
     return(
         <>
-        <Menu/>
-        <main>
+        <main className='main'>
+            <Menu/>
             <section className='main-pisos'>
                    {
                        ubicacion ? (

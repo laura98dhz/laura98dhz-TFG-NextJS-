@@ -1,78 +1,115 @@
 .menu--inmuebles{
     &--container{
+        width: 20%;
         display: flex;
-        justify-content: space-between;
-        background-color: rgb(70, 70, 70);
-    }
-    &--items{
-        display: flex;
-        justify-content: space-between;
+        flex-direction: column;
         align-items: center;
-        width: 100%;
-        padding-left: 4rem;
-        padding-right: 4rem;
-        height: 5rem;
-        transform: translateY(90%);
+        
+        & > form{
+            width: 100%;
+            text-align: center;   
+        }
     }
+
     &--item{
         display: flex;
         flex-direction: column;
-        list-style: none;
-        &--container{
-            display: flex;
-            align-items: center;
-            padding-left: 2rem;
-            padding-right: 2rem;
-            height: 5rem;
-            transition: all ease .5s;
-            &:hover{    
-                background-color: rgb(176, 158, 128);
-                color: white;
+        align-items: center;
+        justify-content: flex-start;
+        height: 20%;
+        width: 100%;
+        border: 1rem solid rgb(70, 70, 70);
+        background-color: rgb(241, 241, 241);
+        padding: 4rem;
 
-                & > .menu--inmuebles--item--flecha{
-                    display: flex;
-                    align-items: center;
-                    content: "";
-                    width: 1rem;
-                    height: 1rem;
-                    border:  10px solid white;
-                    border-width: 2px 0 0 2px;
-                    transform: rotate(45deg);
-                    margin-left: 1rem;
-                    margin-top: 0;
+        &--texto{
+            margin-bottom: 2rem;
+            text-transform: uppercase;
+        }
+       
+        &--1{
+            & > div > input:nth-child(2){
+                margin-left: 2rem;
+            }
+        }
+
+        &--2{
+            & > div {
+                & > input{
+                  width: 70%;
                 }
             }
         }
-        &--texto{
-            color: white;
-            text-align: center;
-        }
-        &--flecha{
-            display: flex;
-            align-items: center;
-            content: "";
-            width: 1rem;
-            height: 1rem;
-            border:  10px solid rgb(176, 158, 128);
-            border-width: 2px 0 0 2px;
-            transform: rotate(-135deg);
-            margin-left: 1rem;
-            margin-top: -1rem;
-        }
-    }
 
-    &--subMenu{
-        display: flex;
-        flex-direction: column;
-        padding-left: 2rem;
-        background-color: aqua;
-        padding: 2rem;
-        &--item{
-            list-style: none;
+        &--3{
+            & > div {
+                width: 100%;
+                & > input{
+                  width: 60%;
+                  cursor: pointer;
+                  background-color: white;
+                  border-radius: 20px;
+                  border: 2px solid rgb(176, 158, 128);
+                  box-shadow: 2px 2px rgb(176, 158, 128);
+                  transition: all ease .5s;
+                  &:hover{
+                      transform: scale(1.1);
+                  }
+                }
+            }
+        }
+
+        &--4{
+            & > div {
+                width: 100%;
+                & > input{
+                    width: 60%;
+                    cursor: pointer;
+                    background-color: white;
+                    border-radius: 20px;
+                    border: 2px solid rgb(176, 158, 128);
+                    box-shadow: 2px 2px rgb(176, 158, 128);
+                    transition: all ease .5s;
+                    &:hover{
+                        transform: scale(1.1);
+                    }
+                }
+            }
+        }
+
+        &--5{
+            & > div {
+                & > input{
+                  width: 70%;
+                }
+            }
+        }
+        &--boton{
+            width: 93%;
+            margin: 0 auto;
+            margin-top: 1rem;
+            height: 3%;
+            color: rgb(70, 70, 70);
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            background-color: white;
+            border: .5px rgb(241, 241, 241) solid;
+            border-radius: 2px;
+            cursor: pointer;
+            transition: all ease .5s;
+
+            &:hover {
+                background-color: rgb(176, 158, 128);
+                color: white;
+            }
         }
     }
-    &--subMenu:first-child{
-        background-color: black;
-        
+    &--item:last-child{
+        border-bottom: none;
+    }
+    &--item:first-child{
+        height: 15%; 
+    }
+    &--item:nth-child(4){
+        height: 18%; 
     }
 }

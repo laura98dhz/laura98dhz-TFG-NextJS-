@@ -1,85 +1,47 @@
 function Menu(){
     return(
         <nav className="menu--inmuebles--container">
-
-            <ul className="menu--inmuebles--items">
-                <li className="menu--inmuebles--item">
-                    <div className="menu--inmuebles--item--container">
-                        <p className="menu--inmuebles--item--texto">Tipo de Inmueble</p>
-                        <div className="menu--inmuebles--item--flecha"></div>
+            <form>
+                <div className="menu--inmuebles--item menu--inmuebles--item--1">
+                <p className="menu--inmuebles--item--texto menu--inmuebles--item--texto--1">Tipo De Inmueble</p>
+                    <div>
+                        <input type="checkbox" name="tipoInmueble" value="Piso"></input> Piso
+                        <input type="checkbox" name="tipoInmueble" value="Casa"></input> Casa
                     </div>
-                    
-                    <ul className="menu--inmuebles--subMenu">
-                        <li className="menu--inmuebles--subMenu--item"><input type="checkbox" name="tipoInmueble[]" value="Piso"/> Piso</li>
-                        <li className="menu--inmuebles--subMenu--item"><input type="checkbox" name="tipoInmueble[]" value="Casa"/> Casa</li>
-                    </ul>
-                </li>
-                <li className="menu--inmuebles--item">
-                    <div className="menu--inmuebles--item--container">
-                        <p className="menu--inmuebles--item--texto">Precio</p>
-                        <div className="menu--inmuebles--item--flecha"></div>
+                </div>
+                <div className="menu--inmuebles--item menu--inmuebles--item--2">
+                    <p className="menu--inmuebles--item--texto menu--inmuebles--item--texto--2">Precio</p>
+                    <div>
+                        Mínimo <input type="number" name="precioMinimo"></input>
+                        Máximo <input type="number" name="precioMaximo"></input>
                     </div>
-                    <ul className="menu--inmuebles--subMenu">
-                        <li className="menu--inmuebles--subMenu--item">Mínimo <input type="number" name="PrecioMin"/></li>
-                        <li className="menu--inmuebles--subMenu--item">Máximo <input type="number" name="PrecioMax"/></li>
-                    </ul>
-                </li>
-                <li className="menu--inmuebles--item">
-                    <div className="menu--inmuebles--item--container">
-                        <p className="menu--inmuebles--item--texto">Habitaciones</p>
-                        <div className="menu--inmuebles--item--flecha"></div>
+                </div>
+                <div className="menu--inmuebles--item menu--inmuebles--item--3">
+                    <p className="menu--inmuebles--item--texto menu--inmuebles--item--texto--3">Habitaciones</p>
+                    <div>
+                        <input type="submit" name="habitaciones" value="1+"></input>
+                        <input type="submit" name="habitaciones" value="2+"></input>
+                        <input type="submit" name="habitaciones" value="3+"></input>
+                        <input type="submit" name="habitaciones" value="4+"></input>
                     </div>
-                    <ul className="menu--inmuebles--subMenu">
-                        <li className="menu--inmuebles--subMenu--item">Piso</li>
-                        <li className="menu--inmuebles--subMenu--item">Casa</li>
-                    </ul>
-                </li>
-                <li className="menu--inmuebles--item">
-                    <div className="menu--inmuebles--item--container">
-                        <p className="menu--inmuebles--item--texto">Baños</p>
-                        <div className="menu--inmuebles--item--flecha"></div>
+                </div>
+                <div className="menu--inmuebles--item menu--inmuebles--item--4">
+                    <p className="menu--inmuebles--item--texto menu--inmuebles--item--texto--4">Baños</p>
+                    <div>
+                        <input type="submit" name="baños" value="1+"></input>
+                        <input type="submit" name="baños" value="2+"></input>
+                        <input type="submit" name="baños" value="3+"></input>
                     </div>
-                    <ul className="menu--inmuebles--subMenu">
-                        <li className="menu--inmuebles--subMenu--item">Piso</li>
-                        <li className="menu--inmuebles--subMenu--item">Casa</li>
-                    </ul>
-                </li>
-                <li className="menu--inmuebles--item">
-                    <div className="menu--inmuebles--item--container">
-                        <p className="menu--inmuebles--item--texto">Sperficie</p>
-                        <div className="menu--inmuebles--item--flecha"></div>
+                </div>
+                <div className="menu--inmuebles--item menu--inmuebles--item--5">
+                    <p className="menu--inmuebles--item--texto menu--inmuebles--item--texto--5">Superficie</p>
+                    <div>
+                        Mínima <input type="number" name="superficieMinimo"></input>
+                        Máxima <input type="number" name="superficieMaximo"></input>
                     </div>
-                    <ul className="menu--inmuebles--subMenu">
-                        <li className="menu--inmuebles--subMenu--item">Piso</li>
-                        <li className="menu--inmuebles--subMenu--item">Casa</li>
-                    </ul>
-                </li>
-
-            </ul>
-
-            {/* <div className="menu--inmuebles--items">
-            <li className="menu--inmuebles--items--menu">
-            {/* <p className="menu--inmuebles--items--menu--texto">Tipo de Inmueble</p>
-                <div className="menu--inmuebles--items--menu--flecha"></div> */}
-            {/* </li> */}
-            {/* </div> */}
-            {/* // <div className="menu--inmuebles--items--menu">  */}
-                {/* <p className="menu--inmuebles--items--menu--texto">Precio</p> */}
-                {/* <div className="menu--inmuebles--items--menu--flecha"></div> */}
-            {/* // </div> */}
-                
-            {/* // <div className="menu--inmuebles--items--menu">  */}
-                {/* <p className="menu--inmuebles--items--menu--texto">Habitaciones</p> */}
-                {/* <div className="menu--inmuebles--items--menu--flecha"></div> */}
-            {/* // </div> */}
-            {/* // <div className="menu--inmuebles--items--menu">  */}
-                {/* <p className="menu--inmuebles--items--menu--texto">Baños</p> */}
-                {/* <div className="menu--inmuebles--items--menu--flecha"></div> */}
-            {/* // </div> */}
-            {/* // <div className="menu--inmuebles--items--menu">  */}
-            {/* //     <p className="menu--inmuebles--items--menu--texto">Sperficie</p> */}
-                {/* <div className="menu--inmuebles--items--menu--flecha"></div> */}
-            {/* // </div> */}
+                </div> 
+                <input className="menu--inmuebles--item--boton" type="submit" value="Filtrar"></input>
+            </form>
         </nav>
     )
 }
