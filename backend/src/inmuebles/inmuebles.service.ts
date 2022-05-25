@@ -9,6 +9,7 @@ import { Between, getRepository, LessThanOrEqual, MoreThanOrEqual } from 'typeor
 import { UsuariosEntity } from 'src/usuarios/usuarios/entities/usuarios.entity';
 import { UsuariosRepository } from 'src/usuarios/usuarios/usuarios.repository';
 
+
 @Injectable()
 export class InmueblesService {
 

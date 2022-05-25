@@ -4,6 +4,7 @@ import { CreateUsuarioDto } from './dto/create-usuarios.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { UsuariosEntity } from './entities/usuarios.entity';
 import { UsuariosRepository } from './usuarios.repository';
+import * as bcrypt from 'bcrypt';
 
 
 @Injectable()
@@ -36,12 +37,51 @@ export class UsuariosService {
         return usuario;
     }
 
+    async comprobarPassword(usser: UpdateUsuarioDto): Promise<any> {
+        const usuario = await this.usuarioRepository.findOne({
+            where: {
+                nombreUsuario: usser.nombreUsuario,
+            }
+        });
+        
+        if (!usuario) {
+            throw new NotFoundException({ message: 'No hay usuario' })
+        }
+        // console.log(usser.contraseña, "<<<")
+        // console.log(usuario)
+        // const isMatch = await bcrypt.compare("1234", "$2b$10$1ot7MKju");
+
+        const saltOrRounds = 10;
+        const password = '1234';
+        const hash = await bcrypt.hash(password, saltOrRounds);
+        console.log(usuario.contraseña)
+        const isMatch = await bcrypt.compare(password, hash);
+
+        return isMatch;
+    }
+
+    // async prueba(){
+
+    //     const saltOrRounds = 10;
+    //     const password = "1234";
+    //     const hash = 
+    //     //const salt = await bcrypt.genSalt();
+
+    //     const isMatch = await bcrypt.compare(password, hash);
+
+    //     return isMatch;
+    
+    // }
+
     async create(data: CreateUsuarioDto): Promise<any> {
         
         const exists = await this.findByNombre(data.nombreUsuario);
 
+        console.log(data.contraseña)
         if(exists) throw new BadRequestException({message: 'Ese usuario ya existe'}) 
         
+        const contraseñaHash = await bcrypt.hash(data.contraseña, 10);
+        data.contraseña = contraseñaHash; 
         const newUsuario = this.usuarioRepository.create(data);
         await this.usuarioRepository.save(newUsuario);
         return newUsuario;
@@ -57,6 +97,10 @@ export class UsuariosService {
         }
 
         if(data.contraseña) {
+            const contraseñaHash = await bcrypt.hash(data.contraseña, 10);
+            
+            data.contraseña = contraseñaHash;
+            
             usuario.contraseña = data.contraseña;        
         }
 

@@ -4,13 +4,15 @@ export class CreateUsuarioDto {
 
     @IsNotEmpty()
     @IsString()
-    readonly nombreUsuario: string;
+    nombreUsuario: string;
 
     @IsNotEmpty()
     @IsString()
-    readonly contraseña: string;
+    contraseña: string;
 
     @IsNotEmpty()
     @IsString()
-    readonly correo: string;
+    correo: string;
+
+
 }

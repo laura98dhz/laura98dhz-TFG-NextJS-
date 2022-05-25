@@ -7,7 +7,7 @@ import { UpdateInmuebleDto } from './dto/update-inmueble.dto';
 export class InmueblesController {
   
   constructor(private readonly inmueblesService: InmueblesService) {}
-  
+
   @Get()
   @HttpCode(HttpStatus.OK)
   findAll() {

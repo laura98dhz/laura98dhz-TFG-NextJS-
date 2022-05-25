@@ -14,6 +14,12 @@ export class UsuariosController {
   findAll() {
     return this.usuariosService.findAll();
   }
+
+  @Post('/password')
+  @HttpCode(HttpStatus.OK)
+  comprobarContraseña(@Body() usser: UpdateUsuarioDto) {
+    return this.usuariosService.comprobarPassword(usser);
+  }
   
   @Get(':nombreUsuario')
   @HttpCode(HttpStatus.OK)
