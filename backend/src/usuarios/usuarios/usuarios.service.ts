@@ -51,11 +51,7 @@ export class UsuariosService {
         // console.log(usuario)
         // const isMatch = await bcrypt.compare("1234", "$2b$10$1ot7MKju");
 
-        const saltOrRounds = 10;
-        const password = '1234';
-        const hash = await bcrypt.hash(password, saltOrRounds);
-        console.log(usuario.contraseña)
-        const isMatch = await bcrypt.compare(password, hash);
+        const isMatch = await bcrypt.compare(usser.contraseña, usuario.contraseña);
 
         return isMatch;
     }

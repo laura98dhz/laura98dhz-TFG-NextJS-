@@ -7,7 +7,7 @@ export class UsuariosEntity{
     @PrimaryColumn()
     readonly nombreUsuario: string;
 
-    @Column({type: 'varchar', length: 15, nullable: false})
+    @Column({type: 'varchar', length: 100, nullable: false})
     readonly contraseña: string;
     
     @Column({type: 'varchar', nullable: false})
