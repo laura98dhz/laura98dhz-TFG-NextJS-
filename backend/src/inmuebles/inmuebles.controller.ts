@@ -13,13 +13,37 @@ export class InmueblesController {
   findAll() {
     return this.inmueblesService.findAll();
   }
-  
-  @Get(':ubicacion')
+
+  @Get('/tipoInmueble')
   @HttpCode(HttpStatus.OK)
-  findByUbicacion(@Param('ubicacion') ubicacion: string) {
-    return this.inmueblesService.findByUbicacion(ubicacion);
+  filterByTipo(@Body() tipoInmueble: CreateInmuebleDto) {
+    return this.inmueblesService.filterByTipo(tipoInmueble);
   }
 
+  @Get('/precio')
+  @HttpCode(HttpStatus.OK)
+  filterByPrecio(@Body() precio: any) {
+    return this.inmueblesService.filterByPrecio(precio);
+  }
+
+  @Get('/habitaciones')
+  @HttpCode(HttpStatus.OK)
+  filterByHabitaciones(@Body() habitaciones: CreateInmuebleDto) {
+    return this.inmueblesService.filterByHabitaciones(habitaciones);
+  }
+
+  @Get('/banos')
+  @HttpCode(HttpStatus.OK)
+  filterByBaños(@Body() baños: CreateInmuebleDto) {
+    return this.inmueblesService.filterByBaños(baños);
+  }
+  
+  @Get('/superficie')
+  @HttpCode(HttpStatus.OK)
+  filterBySuperficie(@Body() superficie: any) {
+    return this.inmueblesService.filterBySuperficie(superficie);
+  }
+  
   @Get('/mostrar/:usuario')
   @HttpCode(HttpStatus.OK)
   findByUsuario(@Param('usuario') usuario: string) {
@@ -32,7 +56,11 @@ export class InmueblesController {
     return this.inmueblesService.findById(id);
   }
 
-  
+  @Get(':ubicacion')
+  @HttpCode(HttpStatus.OK)
+  findByUbicacion(@Param('ubicacion') ubicacion: string) {
+    return this.inmueblesService.findByUbicacion(ubicacion);
+  }
 
   @UsePipes(new ValidationPipe({whitelist:true}))
   @Post('/:vendedor')

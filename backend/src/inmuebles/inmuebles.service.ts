@@ -4,7 +4,7 @@ import { InmueblesEntity } from './entities/inmuebles.entity';
 import { InmueblesRepository } from './inmuebles.repository';
 import { CreateInmuebleDto } from './dto/create-inmueble.dto';
 import { UpdateInmuebleDto } from './dto/update-inmueble.dto';
-import { getRepository } from 'typeorm';
+import { Between, getRepository, LessThanOrEqual, MoreThanOrEqual } from 'typeorm';
 
 import { UsuariosEntity } from 'src/usuarios/usuarios/entities/usuarios.entity';
 import { UsuariosRepository } from 'src/usuarios/usuarios/usuarios.repository';
@@ -46,11 +46,86 @@ export class InmueblesService {
         return inmueble;
     }
 
+    async filterByTipo(tipoInmueble: CreateInmuebleDto): Promise<any> {
+        const inmueble = this.inmuebleRepository.find({
+            where: {
+                tipoInmueble: tipoInmueble.tipoInmueble
+            }
+        });        
+        return inmueble;
+    }
+
+    async filterByPrecio(precio: any): Promise<any> {
+
+        var inmueble = {};
+        if(precio.precioMin===undefined){
+
+            inmueble = this.inmuebleRepository.find({
+                precio: LessThanOrEqual(precio.precioMax)
+            });
+
+        }else if(precio.precioMax===undefined){
+            
+            inmueble = this.inmuebleRepository.find({
+                precio: MoreThanOrEqual(precio.precioMin)
+            }); 
+
+        }else{
+
+            inmueble = this.inmuebleRepository.find({
+                precio: Between(precio.precioMin, precio.precioMax)
+            });  
+        }
+        return inmueble;
+    }
+
+    async filterByHabitaciones(habitaciones: CreateInmuebleDto): Promise<any> {
+        const inmueble = this.inmuebleRepository.find({
+            where: {
+                habitaciones: habitaciones.habitaciones
+            }
+        });        
+        return inmueble;
+    }
+
+    async filterByBaños(baños: CreateInmuebleDto): Promise<any> {
+        const inmueble = this.inmuebleRepository.find({
+            where: {
+                baños: baños.baños
+            }
+        });        
+        return inmueble;
+    }
+
+    async filterBySuperficie(superficie: any): Promise<any> {
+        var inmueble = {};
+        if(superficie.superficieMin===undefined){
+
+            inmueble = this.inmuebleRepository.find({
+                precio: LessThanOrEqual(superficie.superficieMax)
+            });
+             
+        }else if(superficie.superficieMax===undefined){
+            
+            inmueble = this.inmuebleRepository.find({
+                precio: MoreThanOrEqual(superficie.superficieMin)
+            }); 
+
+        }else{
+
+            inmueble = this.inmuebleRepository.find({
+                precio: Between(superficie.superficieMin, superficie.superficieMax)
+            });  
+        }
+        return inmueble;
+    }
+    
     async findByUbicacion(ubicacion: string): Promise<any> {
         const inmueble = this.inmuebleRepository.find({
             where: {
                 ubicacion: ubicacion
-            }
+            },
+
         });        
         return inmueble;
     }
