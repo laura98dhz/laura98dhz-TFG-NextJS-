@@ -1,15 +1,17 @@
 import './scss/main.scss';
 
+import { useState } from 'react';
+
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Pisos from './components/Pisos/Pisos';
 import MainPrincipal from './components/Main/MainPrincipal'
 import Acceder from './components/Acceder/Acceder';
-import { useState } from 'react';
 import AjustesUsuario from './components/AjustesUsuario/AjustesUsuario';
 import Registro from './components/Registro/Registro';
 import CrearInmueble from './components/CrearInmueble/CrearInmueble';
 import EditarInmueble from './components/EditarInmueble/EditarInmueble';
+import Piso from './components/Piso/Piso';
 
 function App() {
 
@@ -116,7 +118,6 @@ function App() {
     setCargarFooter(true);
     sessionStorage.setItem('usuario', usuario.nombreUsuario)
     sessionStorage.setItem('correo', usuario.correo)
-    console.log(usuario)
   }
 
   function editarInmueble(id){
@@ -126,8 +127,10 @@ function App() {
     setCargarFooter(false);
     setId(id);
   }
-  console.log()
-  return (
+
+  console.log(sessionStorage.getItem('usuario'))
+  console.log(cargarCrearInmueble)
+    return (
     <>
       { cargarHeader ?  <Header handleOnClick={mostrarMain} accederOnClick={mostrarAcceder} usuario={sessionStorage.getItem('usuario')} ajustesOnClick={ajustesUsuario} handleCargarAnuncio={cargarPonerAnuncio}/> : "" }
       { cargarAcceder ? <Acceder cerrarOnCLick={cerrarAcceder} usuarioOnClick={usuarioCorrecto} crearUsuarioOnClick={cargarRegistroUsuario}/> : "" }
@@ -137,10 +140,10 @@ function App() {
       { cargarFooter ? <Footer/> : "" }
       { cargarRegistro ? <Registro cargarRegistro={cargarRegistroUsuario} cerrarRegistro={mostrarMain}/> : "" }
       {/* <CrearInmueble cerrarOnCLick={cerrarAcceder}/> */}
-      {/* { sessionStorage.getItem('usuario') && cargarCrearInmueble ? <CrearInmueble cerrarOnCLick={cerrarAcceder}/> : "NOOO" } */}
+      { sessionStorage.getItem('usuario') && cargarCrearInmueble ? <CrearInmueble cerrarOnCLick={cerrarAcceder}/> : "NOOO" }
       { cargarEditarInmueble ? <EditarInmueble id={id} cerrarOnCLick={cerrarEditarInmueble}/> : "" }
     </>
-  );
+   );
 }
 
 export default App;

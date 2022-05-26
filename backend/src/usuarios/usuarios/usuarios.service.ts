@@ -53,19 +53,6 @@ export class UsuariosService {
         return isMatch;
     }
 
-    // async prueba(){
-
-    //     const saltOrRounds = 10;
-    //     const password = "1234";
-    //     const hash = 
-    //     //const salt = await bcrypt.genSalt();
-
-    //     const isMatch = await bcrypt.compare(password, hash);
-
-    //     return isMatch;
-    
-    // }
-
     async create(data: CreateUsuarioDto): Promise<any> {
         
         const exists = await this.findByNombre(data.nombreUsuario);

@@ -95,6 +95,12 @@ export default function CrearInmueble(props){
                             <textarea name="descripcion" className="crear-inmueble-descripcion-caja"></textarea>
                         </div>
                     </div>
+                    <div className="crear-inmueble-imagen">
+                        <p className="crear-inmueble-imagen-texto ">Subir Fotos</p>
+                        <div className="crear-inmueble-imagen-container">
+                            <input type="file" name="imagen" className="crear-inmueble-imagen-caja"></input>
+                        </div>
+                    </div>
                     
                     <input type="submit" className="crear-inmueble-boton" value="Subir"/>
 

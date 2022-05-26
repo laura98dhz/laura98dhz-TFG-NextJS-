@@ -82,6 +82,28 @@
         }
     }
 
+    &-imagen{
+        margin: 0 auto;
+        margin-top: 3rem;
+        margin-bottom: 2rem;
+        border-radius: 5px;
+        height: 6rem;
+        width: 100%;
+
+        &-texto{
+            color: rgb(70,70,70);  
+            margin-bottom: 3rem; 
+            font-weight: bold;
+        }
+        
+        &-container{
+            display: flex;
+            border-bottom: 1px solid rgb(70, 70, 70);
+            border-radius: 2px;
+        }
+
+         
+    }
     
     &-boton{
         width: 35%;

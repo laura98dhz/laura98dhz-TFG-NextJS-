@@ -20,7 +20,7 @@ function Header(props){
     function ponerAnuncio(){
         props.handleCargarAnuncio();
     }
-    
+
     return(
         <header className='header'>
             <img src={logo} className='logo' onClick={()=>cargarMain()}/>

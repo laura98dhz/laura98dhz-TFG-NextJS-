@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 
 function Acceder (props){
     const [buscarUsuario, setBuscarUsuario] = useState(false);
-    const [nombreUsuario, setNombreUsuario] = useState(null);
+    const [nombreUsuario, setNombreUsuario] = useState("");
     const [recuperarContraseña, setRecuperarContraseña] = useState(false);
     const [usuarioValido, setUsuarioValido] = useState("");
     const [correoValido, setCorreoValido] = useState(false);
@@ -44,22 +44,23 @@ function Acceder (props){
         }).then( () => {
             setMensajeError("")
         })
-        .catch(setMensajeError("Ese Usuario No Existe")); 
-
+        .catch(setMensajeError("Ese Usuario No Existe"));
+        
         fetch("http://localhost:8080/usuarios/" + usuario.current.value, { 
             'method': 'GET',
             'headers': { 'Content-Type': 'application/json' }  
         }).then( result => {
             return result.json();
         }).then( usuario => {
-            console.log(usuario)
+            console.log("Acceder dentro fech>>>",usuario)
             setNombreUsuario(usuario);
         }).then( () => {
             setMensajeError("")
         })
-        .catch(setMensajeError("Ese Usuario No Existe")); 
+        .catch(setMensajeError("Ese Usuario No Existe"));
 
     }
+
 
     if(buscarUsuario){
         props.usuarioOnClick(nombreUsuario);
