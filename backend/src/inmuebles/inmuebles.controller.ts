@@ -1,8 +1,9 @@
-import { Controller, Get, Post, Body, Param, Delete, Put, ParseIntPipe, HttpStatus, HttpCode, UsePipes, ValidationPipe, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Put, ParseIntPipe, HttpStatus, HttpCode, UsePipes, ValidationPipe, UseInterceptors, UploadedFile, UploadedFiles } from '@nestjs/common';
 import { InmueblesService } from './inmuebles.service';
 import { CreateInmuebleDto } from './dto/create-inmueble.dto';
 import { UpdateInmuebleDto } from './dto/update-inmueble.dto';
-import { FileInterceptor } from '@nestjs/platform-express';
+import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
+import { Multer } from 'multer';
 
 @Controller('inmuebles')
 export class InmueblesController {
@@ -65,10 +66,10 @@ export class InmueblesController {
 
   @UsePipes(new ValidationPipe({whitelist:true}))
   @Post('/:vendedor')
-  @UseInterceptors(FileInterceptor ('file'))
+  @UseInterceptors(FilesInterceptor ('files'))
   @HttpCode(HttpStatus.CREATED)
-  create( @UploadedFile() file: Buffer ) {
-    console.log(file)
+  create( @UploadedFiles() files ) {
+    console.log(files)
     //return this.inmueblesService.create(vendedor, data);
   }
 

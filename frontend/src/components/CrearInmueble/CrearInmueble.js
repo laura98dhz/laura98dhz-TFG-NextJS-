@@ -98,7 +98,7 @@ export default function CrearInmueble(props){
                     <div className="crear-inmueble-imagen">
                         <p className="crear-inmueble-imagen-texto ">Subir Fotos</p>
                         <div className="crear-inmueble-imagen-container">
-                            <input type="file" name="imagen" className="crear-inmueble-imagen-caja"></input>
+                            <input type="file" name="imagenes[]" className="crear-inmueble-imagen-caja" multiple></input>
                         </div>
                     </div>
                     
