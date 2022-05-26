@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 
 
 function Acceder (props){
-    const [buscarUsuario, setBuscarUsuario] = useState(null);
-    const [buscarContraseña, setBuscarContraseña] = useState(null);
+    const [buscarUsuario, setBuscarUsuario] = useState(false);
+    const [nombreUsuario, setNombreUsuario] = useState(null);
     const [recuperarContraseña, setRecuperarContraseña] = useState(false);
     const [usuarioValido, setUsuarioValido] = useState("");
     const [correoValido, setCorreoValido] = useState(false);
@@ -30,9 +30,13 @@ function Acceder (props){
             contraseñaContainer.current.style.border = "";
         }
 
-        fetch("http://localhost:8080/usuarios/"+ usuario.current.value, { 
-            'method': 'GET',
-            'headers': { 'Content-Type': 'application/json' },    
+        fetch("http://localhost:8080/usuarios/password", { 
+            'method': 'POST',
+            'headers': { 'Content-Type': 'application/json' },  
+            'body': JSON.stringify({
+                'nombreUsuario': usuario.current.value,
+                'contraseña': contraseña.current.value
+            })   
         }).then( result => {
             return result.json();
         }).then( usuario => {
@@ -41,15 +45,24 @@ function Acceder (props){
             setMensajeError("")
         })
         .catch(setMensajeError("Ese Usuario No Existe")); 
-        setBuscarContraseña(contraseña.current.value)
 
-        
+        fetch("http://localhost:8080/usuarios/" + usuario.current.value, { 
+            'method': 'GET',
+            'headers': { 'Content-Type': 'application/json' }  
+        }).then( result => {
+            return result.json();
+        }).then( usuario => {
+            console.log(usuario)
+            setNombreUsuario(usuario);
+        }).then( () => {
+            setMensajeError("")
+        })
+        .catch(setMensajeError("Ese Usuario No Existe")); 
+
     }
 
-    if(buscarUsuario !== null && buscarContraseña !== null){
-        if(buscarContraseña === buscarUsuario.contraseña){
-            props.usuarioOnClick(buscarUsuario);
-        }
+    if(buscarUsuario){
+        props.usuarioOnClick(nombreUsuario);
     }
 
     function registrarUsuario(){
@@ -59,6 +72,7 @@ function Acceder (props){
     function contraseñaOlvidada(){
         setRecuperarContraseña(true)
     }
+
     function comprobarEmail(e){
         e.nativeEvent.preventDefault();
         

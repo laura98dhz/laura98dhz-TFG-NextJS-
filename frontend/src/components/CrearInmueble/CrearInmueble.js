@@ -1,5 +1,3 @@
-import { useRef } from "react";
-
 export default function CrearInmueble(props){
     
     function crearInmueble(e){

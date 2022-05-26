@@ -4,7 +4,8 @@ import { CreateUsuarioDto } from './dto/create-usuarios.dto';
 import { UpdateUsuarioDto } from './dto/update-usuario.dto';
 import { UsuariosEntity } from './entities/usuarios.entity';
 import { UsuariosRepository } from './usuarios.repository';
-import * as bcrypt from 'bcrypt';
+//import * as bcrypt from 'bcrypt';
+import * as bcrypt from 'bcryptjs';
 
 
 @Injectable()
@@ -47,10 +48,6 @@ export class UsuariosService {
         if (!usuario) {
             throw new NotFoundException({ message: 'No hay usuario' })
         }
-        // console.log(usser.contraseña, "<<<")
-        // console.log(usuario)
-        // const isMatch = await bcrypt.compare("1234", "$2b$10$1ot7MKju");
-
         const isMatch = await bcrypt.compare(usser.contraseña, usuario.contraseña);
 
         return isMatch;

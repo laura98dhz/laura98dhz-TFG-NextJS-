@@ -116,6 +116,7 @@ function App() {
     setCargarFooter(true);
     sessionStorage.setItem('usuario', usuario.nombreUsuario)
     sessionStorage.setItem('correo', usuario.correo)
+    console.log(usuario)
   }
 
   function editarInmueble(id){
@@ -125,7 +126,7 @@ function App() {
     setCargarFooter(false);
     setId(id);
   }
-
+  console.log()
   return (
     <>
       { cargarHeader ?  <Header handleOnClick={mostrarMain} accederOnClick={mostrarAcceder} usuario={sessionStorage.getItem('usuario')} ajustesOnClick={ajustesUsuario} handleCargarAnuncio={cargarPonerAnuncio}/> : "" }
@@ -135,7 +136,8 @@ function App() {
       { cargarAjustesUsuario ? <AjustesUsuario cerrarAjustes={cerrarAjustesUsuario} handleEditar={editarInmueble}/> : "" }
       { cargarFooter ? <Footer/> : "" }
       { cargarRegistro ? <Registro cargarRegistro={cargarRegistroUsuario} cerrarRegistro={mostrarMain}/> : "" }
-      { sessionStorage.getItem('usuario') && cargarCrearInmueble ? <CrearInmueble cerrarOnCLick={cerrarAcceder}/> : "" }
+      {/* <CrearInmueble cerrarOnCLick={cerrarAcceder}/> */}
+      {/* { sessionStorage.getItem('usuario') && cargarCrearInmueble ? <CrearInmueble cerrarOnCLick={cerrarAcceder}/> : "NOOO" } */}
       { cargarEditarInmueble ? <EditarInmueble id={id} cerrarOnCLick={cerrarEditarInmueble}/> : "" }
     </>
   );
